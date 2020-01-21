@@ -1,149 +1,68 @@
+/* ELEMENT CLASS for CHECK */
 .BORDER_RED    { border-style: dashed; color: red   ; }
 .BORDER_BLUE   { border-style: dashed; color: blue  ; }
 .BORDER_GREEN  { border-style: dashed; color: green ; }
 .BORDER_YELLOW { border-style: dashed; color: yellow; }
-
-body {
-    background: #FAFAFA;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-img {
-    opacity: 0.9;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    pointer-events: none;
-}
-
-button, input:focus {
-    outline: none !important;
-    border: none !important;
-    outline-offset: 0 !important;
-}
-
-button {
-    text-transform: uppercase;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: pointer;
-    transition: all 0.5s;
-}
-
-button:hover {
-    transform: translateY(2px);
-}
-
-button span {
-    cursor: pointer;
-    outline: none !important;
-}
-
-::selection {
-    background: #1DE9B6 !important;
-    color: black !important;
-    opacity: 1;
-}
-
-:focus {
-    outline: 3px solid #0A6ED150;
-    font-weight: 700;
-}
-
-.leftArea {
-    background: #62757F;
-}
-
-.sapUiBody {
-    margin: 0 !important;
-    color: #62757F;
-    font-family: 'IBM Plex Sans', sans-serif;
-}
-
-.sapMText {
-    color: #62757F;
-    font-family: ''IBM Plex Sans', sans-serif;
-}
-
-.html.sap-desktop .sapMBtn:focus>.sapMFocusable {
-    outline: none !important;
-}
-
-.sapMBtnInner {
-    outline: none !important;
-    text-shadow: none !important;
-    font-family: ''IBM Plex Sans', sans-serif !important;
-}
-
-.noselect {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.leftView {
-    width: 182px !important;
-    height: 100% !important;
-    padding-left: 24px;
-    padding-right: 24px;
-    background: #62757F;
-}
-
-.leftView>div, .leftView>div>div {
-    width: 100% !important;
-}
-
-.leftView .menuListBox img{
-    width: 24px !important;
-    height: 24px !important;
-}
-
-.leftView .subTitle {
-    margin-left: 16px;
-    font-size: 16px;
-    color: #FAFAFA !important;
-}
-
-.mvpLogoType {
-    width: 115px !important;
-    margin-top: 32px;
-    margin-bottom: 32px;
-}
-
-/* button */
-.btnLeftList {
-    width: 182px !important;
-    height: 38px !important;
-    margin-bottom: 10px;
-}
-
-.btnLeftList >span {
-    background: #90A4AED4 !important;
-    border: none !important;
-    transition: all 1s;
-}
+/* ELEMENT CLASS for CHECK END*/
 
 
-.btnLeftList bdi {
-    color: #FFF !important;
-}
+/* ROOT DEFAULT SETTING */
+.sapUiBody 		{ margin: 0 !important; color: #62757F; font-family: 'IBM Plex Sans', sans-serif; }
+.sapMText 		{ color: #62757F; 		font-family: 'IBM Plex Sans', sans-serif; }
+.sapMNav		{ overflow: auto; }
+body 			{ background: #FAFAFA; 	margin: 0; 	padding: 0; overflow: hidden; }
+img 			{ opacity: 0.9; 		-webkit-touch-callout: none; 	-webkit-user-select: none; 		-khtml-user-select: none; 	-moz-user-select: none; 	-ms-user-select: none; 	user-select: none; 		pointer-events: none; 						}
+button 			{ transition: ALL 0.5s; text-transform: uppercase; 		-webkit-touch-callout: none; 	-webkit-user-select: none; 	-khtml-user-select: none;	-moz-user-select: none; -ms-user-select: none; 	user-select: none; 		cursor: pointer; 	}
+button,
+button span 	{ cursor: pointer; 		outline: none !important; 	}
+.leftArea 		{ background: #62757F; 								}
+.sapMBtnInner 	{ outline:none!important; 	text-shadow: none !important; 	font-family: 'IBM Plex Sans', sans-serif !important;	}
+.noselect 		{ -webkit-touch-callout: none; 	-webkit-user-select: none; 		-khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+.sapViewInner 					{ display: block; position: relative; padding: 64px; }
+.sapViewInner>div 				{ display: block; }
 
-.btnLeftList .sapBtnActive{
-    backgroud: #FF5267;
-}
+/* ROOT DEFAULT SETTING > VIRTURE CLASS */
+input:focus 	{ outline: none !important; border: none !important; outline-offset: 0 !important; }
+button:hover 	{ transform: translateY(2px); }
+::selection 	{ background: #1DE9B6 !important; color: black !important; opacity: 1; }
+:focus 			{ outline: 3px solid #0A6ED150; font-weight: 700; }
+.html.sap-desktop .sapMBtn:focus>.sapMFocusable { outline: none !important; }
+/* ROOT DEFAULT SETTING */
 
-.btnLeftList:hover >span {
-    background:#FF5267 !important;
-}
+
+/* COMMON BUTTON STYLE */
+.btnLeftList 					{	width: 182px !important; height: 38px !important; margin-bottom: 10px;	}
+.btnLeftList >span 				{	background: #90A4AED4 !important; border: none !important; transition: ALL 1s;	}
+.btnLeftList bdi 				{	color: #FFF !important;	}
+.btnLeftList .sapBtnActive		{	backgroud: #FF5267;	}
+.btnLeftList:hover >span 		{	background:#FF5267 !important;	}
+/* COMMON BUTTON STYLE END */
+
+
+/* LEFT VIEW */
+.leftView 						{	width: 182px !important; height: 100% !important; padding-left: 24px; padding-right: 24px; background: #62757F;	}
+.leftView>div, .leftView>div>div{   width: 100% !important;	}
+.leftView .menuListBox img		{	width: 24px !important; height: 24px !important;	}
+.leftView .subTitle 			{   margin-left: 16px; font-size: 16px; color: #FAFAFA !important;	}
+.mvpLogoType 					{	width: 115px !important; margin-top: 32px; margin-bottom: 32px;	}
+/* LEFT VIEW END */
+
+/* CONTENT VIEW */
+.contentArea					{ 	display: flex; justify-content: space-between; }
+.contentArea >div:nth-child(1) 	{ 	width: 26%; min-width: 250px; }
+.contentArea >div:nth-child(2) 	{	width: 70%; min-width: 700px; }
+.titleArea						{ 	width: 100%; margin-bottom: 32px; justify-content: space-between; display: flex; }
+.headCopy 						{	font-size: 60px !important; font-weight: 500;	}
+.sapViewInner .subTitle			{	font-size: 20px; font-weight: 500; margin-top: 16px; margin-bottom: 16px; }
+.cardItemUI						{	width: 92%; position: relative; padding: 16px; margin: 2px; margin-bottom: 16px; border-radius: 16px; box-shadow: 0 1px 2px gray; }
+.cardItemUI >div 				{ 	width: 50%;	}
+.cardItemUI >div:nth-child(2) 	{	text-align: right !important; }
+.cardItemTitle 					{	font-size: 32px; font-weight: 500; }
+.cardItemUnit 					{	margin-top: 16px; margin-left: 4px; opacity: 0.7; }
+.cardItemStatus					{	color: #FF5267 !important; }
+.cardItemValue 					{ 	font-size: 64px; font-weight: 100; }
+.chartArea 						{	width: 100%; height: 260px; background: #90A4AE; opacity: 0.05; }
+/* CONTENT VIEW END */
+
+
+
