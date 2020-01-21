@@ -136,7 +136,7 @@ public class ReaderRestApiImpl implements ItemReader<List<ReaderReturnDTO>>
                 readerReturnObj.setColumn25(serviceId                                      );
                 readerReturnObj.setColumn26(list.get(i).get(ColumnMap.json[25]).textValue());
                 readerReturnObj.setColumn27(list.get(i).get(ColumnMap.json[26]).textValue());
-                readerReturnObj.setColumn28(String.valueOf(urlconnection.getResponseCode()) );
+                readerReturnObj.setColumn28(list.get(i).get(ColumnMap.json[27]).textValue());
                 readerReturnObj.setColumn29(list.get(i).get(ColumnMap.json[28]).textValue());
                 readerReturnObj.setColumn30(list.get(i).get(ColumnMap.json[29]).textValue());
                 readerReturnObj.setColumn31(list.get(i).get(ColumnMap.json[30]).textValue());
