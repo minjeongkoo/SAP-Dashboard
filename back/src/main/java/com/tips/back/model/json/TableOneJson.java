@@ -1,9 +1,6 @@
 package com.tips.back.model.json;
 
-import java.util.ArrayList;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
@@ -45,7 +42,4 @@ public class TableOneJson
     private String stationname;
     private String totalcount;
     private String ver;
-    
-    @JsonProperty("list")
-    public ArrayList<TableOneJson> TableOneList;
 }
