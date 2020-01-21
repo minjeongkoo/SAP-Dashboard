@@ -19,8 +19,8 @@
                             <Text   text="Quick Start"	class="subTitle"/>
                         </l:HorizontalLayout>
                         <Button     id="contents1"  text="Air Pollution"    press=".onNavToContent1" class="btnLeftList"/>
-                        <Button     id="contents2"  text="Case Studies"     press=".onNavToContent2" class="btnLeftList"/>
-                        <Button     id="contents3"  text="Case Studies"     press=".onNavToContent3" class="btnLeftList"/>
+                        <Button     id="contents2"  text="Case Studies 2"     press=".onNavToContent2" class="btnLeftList"/>
+                        <Button     id="contents3"  text="Case Studies 3"     press=".onNavToContent3" class="btnLeftList"/>
                     </VBox>
                 </l:VerticalLayout>
             </VBox>
