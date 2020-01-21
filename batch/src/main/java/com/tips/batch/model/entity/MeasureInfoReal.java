@@ -14,13 +14,13 @@ import org.eclipse.persistence.annotations.Customizer;
 import org.hibernate.annotations.Generated;
 import org.springframework.data.jpa.repository.Temporal;
 
-
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @Entity
 @Table
-public class MeasureInfoRealStage implements Serializable
+public class MeasureInfoReal implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,9 +28,9 @@ public class MeasureInfoRealStage implements Serializable
     private Long id; 
 
     @Column(name = "data_time"     ) private String columnA1;
-    @Column(name = "data_term"     ) private String columnA2;
+  //@Column(name = "data_term"     ) private String columnA2;
     @Column(name = "sido_name"     ) private String columnA3;
-    @Column(name = "station_code"  ) private String columnA4;
+  //@Column(name = "station_code"  ) private String columnA4;
     @Column(name = "station_name"  ) private String columnA5;
     @Column(name = "mang_name"     ) private String columnA6;
     @Column(name = "so2_value"     ) private String columnA7;
@@ -51,16 +51,16 @@ public class MeasureInfoRealStage implements Serializable
     @Column(name = "pm25_grade"    ) private String columnC4;
     @Column(name = "pm25_grade_1h" ) private String columnC5;
     @Column(name = "khai_grade"    ) private String columnC6;
-    @Column(name = "service_key"   ) private String columnC7;
-    @Column(name = "page_no"       ) private String columnC8;
-    @Column(name = "num_of_rows"   ) private String columnC9;
-    @Column(name = "result_code"   ) private String columnD1;
-    @Column(name = "result_msg"    ) private String columnD2;
-    @Column(name = "rnum"          ) private String columnD3;
-    @Column(name = "total_count "  ) private String columnD4;
-    @Column(name = "ver"           ) private String columnD5;
+  //@Column(name = "service_key"   ) private String columnC7;
+  //@Column(name = "page_no"       ) private String columnC8;
+  //@Column(name = "num_of_rows"   ) private String columnC9;
+  //@Column(name = "result_code"   ) private String columnD1;
+  //@Column(name = "result_msg"    ) private String columnD2;
+  //@Column(name = "rnum"          ) private String columnD3;
+  //@Column(name = "total_count "  ) private String columnD4;
+  //@Column(name = "ver"           ) private String columnD5;
 
-    //@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    //@Column(insertable=false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     //private String createData;
 }
     

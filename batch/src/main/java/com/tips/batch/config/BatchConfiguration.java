@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 
+import com.tips.batch.bean.listener.ListenerDBExt;
 import com.tips.batch.bean.listener.ListenerFlatFileExt;
 import com.tips.batch.bean.processor.ProcessorImpl;
 import com.tips.batch.bean.reader.ReaderDummyImpl;
@@ -25,10 +26,11 @@ import com.tips.batch.bean.reader.ReaderFlatFileExt;
 import com.tips.batch.bean.reader.ReaderRestApiImpl;
 import com.tips.batch.bean.writer.WriterDBImpl;
 import com.tips.batch.bean.writer.WriterDTOImpl;
-import com.tips.batch.model.BizVO;
 import com.tips.batch.model.ProcessorReceiveDTO;
 import com.tips.batch.model.ReaderReturnDTO;
 import com.tips.batch.model.entity.MeasureInfoRealStage;
+import com.tips.batch.model.vo.BizVO;
+import com.tips.batch.model.vo.MeasureInfoVO;
 
 /**
  * 
@@ -50,6 +52,12 @@ public class BatchConfiguration
     public BizVO bizVO()
     {
         return new BizVO();
+    }
+
+    @Bean
+    public MeasureInfoVO measureInfoVO()
+    {
+        return new MeasureInfoVO();
     }
     
     // Reader ----------------------------------------------------------------
@@ -97,6 +105,12 @@ public class BatchConfiguration
     {
         return new ListenerFlatFileExt();
     }
+
+    @Bean
+    public ListenerDBExt listenerDBExt()
+    {
+        return new ListenerDBExt();
+    }
     
     // RunIncreamenter -------------------------------------------------------
     @Bean
@@ -113,6 +127,7 @@ public class BatchConfiguration
         return jobBuilderFactory.get("ETLJob")                       // Share Quartz Configuration
                                 .incrementer(runIdIncrementer   ())  // Automatically parameter increase
                               //.listener   (listenerFlatFileExt())  // Must be Bean
+                                .listener   (listenerDBExt      ())
                                 .flow       (stepBean())
                                 .end()
                                 .build();

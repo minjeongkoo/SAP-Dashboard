@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tips.batch.annotation.ColumnMap;
+import com.tips.batch.mapper.ColumnMap;
 import com.tips.batch.model.ReaderReturnDTO;
 import com.tips.batch.model.reader.ReaderSourceDTO;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -57,7 +57,7 @@ public class ReaderRestApiImpl implements ItemReader<List<ReaderReturnDTO>>
             String serviceKey    = "2%2Bxy%2FDG9FLV3s9hUtwRXX1%2F4KjR92LJqXblaoGqWPzs2u4s4ZxqgXnYQiEUNIAaoXjy66zBIafygmX8ayFFgRw%3D%3D";
             String numOfRows     = "100"                                  ;
             String pageNo        = "1"                                    ;
-            String sidoNameTmp   = "인천"                                  ;
+            String sidoNameTmp   = "서울"                                  ;
             String sidoName      = URLEncoder.encode(sidoNameTmp, "UTF-8");
             String version       = "1.3"                                  ;
             String returnType    = "json"                                 ;

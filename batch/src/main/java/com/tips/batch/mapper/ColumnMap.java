@@ -1,4 +1,4 @@
-package com.tips.batch.annotation;
+package com.tips.batch.mapper;
 
 public class ColumnMap
 {

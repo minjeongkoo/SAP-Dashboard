@@ -3,6 +3,7 @@ package com.tips.batch.bean.writer;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -19,23 +20,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
-import com.tips.batch.annotation.ColumnMap;
-import com.tips.batch.model.BizVO;
+import com.tips.batch.mapper.ColumnMap;
 import com.tips.batch.model.FileWriteDTO;
 import com.tips.batch.model.ProcessorReceiveDTO;
+import com.tips.batch.model.entity.MeasureInfoReal;
 import com.tips.batch.model.entity.MeasureInfoRealStage;
-import com.tips.batch.repository.BatchTargetRepository;
-import com.tips.batch.service.BatchTargetService;
-import com.tips.batch.service.impl.BatchTargetServiceImpl;
+import com.tips.batch.model.vo.BizVO;
+import com.tips.batch.model.vo.MeasureInfoVO;
+
 
 @StepScope
 public class WriterDBImpl implements ItemWriter<List<ProcessorReceiveDTO>>
 {
     private static final Logger log = LoggerFactory.getLogger(WriterDBImpl.class);
     
-    private JdbcBatchItemWriter<MeasureInfoRealStage> batchTargetWriter;
+    @Autowired
+    MeasureInfoVO measureInfoVO;
     
-    BatchTargetServiceImpl batchTargetServiceImpl;
+    private JdbcBatchItemWriter<MeasureInfoRealStage> batchTargetWriter;
     
     SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
 
@@ -153,6 +155,32 @@ public class WriterDBImpl implements ItemWriter<List<ProcessorReceiveDTO>>
                 batchTarget.setColumnD5(record.getColumn32());
                 
                 batchTargetList.add(batchTarget);
+
+                // To Listener
+                MeasureInfoReal measureInfoReal = new MeasureInfoReal();
+                
+                measureInfoReal.setColumnA1(record.getColumn1 ());
+                measureInfoReal.setColumnA3(record.getColumn3 ());
+                measureInfoReal.setColumnA5(record.getColumn5 ());
+                measureInfoReal.setColumnA6(record.getColumn6 ());
+                measureInfoReal.setColumnA7(record.getColumn7 ());
+                measureInfoReal.setColumnA8(record.getColumn8 ());
+                measureInfoReal.setColumnA9(record.getColumn9 ());
+                measureInfoReal.setColumnB1(record.getColumn10());
+                measureInfoReal.setColumnB3(record.getColumn11());
+                measureInfoReal.setColumnB4(record.getColumn12());
+                measureInfoReal.setColumnB5(record.getColumn13());
+                measureInfoReal.setColumnB6(record.getColumn14());
+                measureInfoReal.setColumnB7(record.getColumn15());
+                measureInfoReal.setColumnB8(record.getColumn16());
+                measureInfoReal.setColumnB9(record.getColumn17());
+                measureInfoReal.setColumnC1(record.getColumn18());
+                measureInfoReal.setColumnC3(record.getColumn19());
+                measureInfoReal.setColumnC4(record.getColumn20());
+                measureInfoReal.setColumnC5(record.getColumn21());
+                measureInfoReal.setColumnC6(record.getColumn22());
+                
+                measureInfoVO.put(record.getColumn5(), measureInfoReal);
             });
             
             this.batchTargetWriter.write(batchTargetList);

@@ -8,27 +8,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.tips.batch.model.BizVO;
 import com.tips.batch.model.FileWriteDTO;
 import com.tips.batch.model.ProcessorReceiveDTO;
 import com.tips.batch.model.entity.MeasureInfoRealStage;
-import com.tips.batch.repository.BatchTargetRepository;
-import com.tips.batch.service.BatchTargetService;
+import com.tips.batch.model.vo.BizVO;
 
-/**
- * The Class StockPriceAggregator.
- * 
- * @author ashraf
- */
+
 public class WriterDTOImpl implements ItemWriter<ProcessorReceiveDTO>
 {
 	private static final Logger log = LoggerFactory.getLogger(WriterDTOImpl.class);
 	
     @Autowired
     private BizVO bizVO;
-
-    BatchTargetService batchTargetService;
-    BatchTargetRepository batchTargetRepository;
 
     @Override
     public void write(List<? extends ProcessorReceiveDTO> items) throws Exception
