@@ -1,0 +1,149 @@
+.BORDER_RED    { border-style: dashed; color: red   ; }
+.BORDER_BLUE   { border-style: dashed; color: blue  ; }
+.BORDER_GREEN  { border-style: dashed; color: green ; }
+.BORDER_YELLOW { border-style: dashed; color: yellow; }
+
+body {
+    background: #FAFAFA;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+img {
+    opacity: 0.9;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+button, input:focus {
+    outline: none !important;
+    border: none !important;
+    outline-offset: 0 !important;
+}
+
+button {
+    text-transform: uppercase;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+button:hover {
+    transform: translateY(2px);
+}
+
+button span {
+    cursor: pointer;
+    outline: none !important;
+}
+
+::selection {
+    background: #1DE9B6 !important;
+    color: black !important;
+    opacity: 1;
+}
+
+:focus {
+    outline: 3px solid #0A6ED150;
+    font-weight: 700;
+}
+
+.leftArea {
+    background: #62757F;
+}
+
+.sapUiBody {
+    margin: 0 !important;
+    color: #62757F;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.sapMText {
+    color: #62757F;
+    font-family: ''IBM Plex Sans', sans-serif;
+}
+
+.html.sap-desktop .sapMBtn:focus>.sapMFocusable {
+    outline: none !important;
+}
+
+.sapMBtnInner {
+    outline: none !important;
+    text-shadow: none !important;
+    font-family: ''IBM Plex Sans', sans-serif !important;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.leftView {
+    width: 182px !important;
+    height: 100% !important;
+    padding-left: 24px;
+    padding-right: 24px;
+    background: #62757F;
+}
+
+.leftView>div, .leftView>div>div {
+    width: 100% !important;
+}
+
+.leftView .menuListBox img{
+    width: 24px !important;
+    height: 24px !important;
+}
+
+.leftView .subTitle {
+    margin-left: 16px;
+    font-size: 16px;
+    color: #FAFAFA !important;
+}
+
+.mvpLogoType {
+    width: 115px !important;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+/* button */
+.btnLeftList {
+    width: 182px !important;
+    height: 38px !important;
+    margin-bottom: 10px;
+}
+
+.btnLeftList >span {
+    background: #90A4AED4 !important;
+    border: none !important;
+    transition: all 1s;
+}
+
+
+.btnLeftList bdi {
+    color: #FFF !important;
+}
+
+.btnLeftList .sapBtnActive{
+    backgroud: #FF5267;
+}
+
+.btnLeftList:hover >span {
+    background:#FF5267 !important;
+}
