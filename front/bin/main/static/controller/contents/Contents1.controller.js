@@ -56,7 +56,7 @@ sap.ui.define([
         localApi : function()
         {
             var oParam = {
-                url     : "http://localhost:8081/finedustlist",
+                url     : "http://localhost:8081/list",
                 type    : "GET",
                 data    : "",
                 callback: "callbackFunction",
@@ -106,7 +106,7 @@ sap.ui.define([
         local1api : function()
         {
             var oParam = {
-                url     : "http://localhost:8081/frcstdustlist",
+                url     : "http://localhost:8081/list",
                 type    : "GET",
                 data    : "",
                 callback: "callbackFunction1",
