@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tips.batch.model.BizVO;
 import com.tips.batch.model.FileWriteDTO;
-import com.tips.batch.model.entity.TableOneStage;
+import com.tips.batch.model.entity.MeasureInfoRealStage;
 import com.tips.batch.repository.BatchTargetRepository;
 import com.tips.batch.service.BatchTargetService;
 

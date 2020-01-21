@@ -28,7 +28,7 @@ import com.tips.batch.bean.writer.WriterDTOImpl;
 import com.tips.batch.model.BizVO;
 import com.tips.batch.model.ProcessorReceiveDTO;
 import com.tips.batch.model.ReaderReturnDTO;
-import com.tips.batch.model.entity.TableOneStage;
+import com.tips.batch.model.entity.MeasureInfoRealStage;
 
 /**
  * 
@@ -112,7 +112,7 @@ public class BatchConfiguration
     {
         return jobBuilderFactory.get("ETLJob")                       // Share Quartz Configuration
                                 .incrementer(runIdIncrementer   ())  // Automatically parameter increase
-                                .listener   (listenerFlatFileExt())  // Must be Bean
+                              //.listener   (listenerFlatFileExt())  // Must be Bean
                                 .flow       (stepBean())
                                 .end()
                                 .build();

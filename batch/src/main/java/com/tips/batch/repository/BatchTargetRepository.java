@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.tips.batch.model.ProcessorReceiveDTO;
-import com.tips.batch.model.entity.TableOneStage;
+import com.tips.batch.model.entity.MeasureInfoRealStage;
 
 
 @Repository
-public interface BatchTargetRepository extends JpaRepository<TableOneStage, String>
+public interface BatchTargetRepository extends JpaRepository<MeasureInfoRealStage, String>
 {
 }

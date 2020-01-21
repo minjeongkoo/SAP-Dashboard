@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tips.batch.model.ProcessorReceiveDTO;
-import com.tips.batch.model.entity.TableOneStage;
+import com.tips.batch.model.entity.MeasureInfoRealStage;
 import com.tips.batch.repository.BatchTargetRepository;
 import com.tips.batch.service.BatchTargetService;
 
@@ -24,14 +24,14 @@ public class BatchTargetServiceImpl implements BatchTargetService
     @Autowired
     BatchTargetRepository batchTargetRepository;
 
-    public List<TableOneStage> findAll() throws InvalidParameterException 
+    public List<MeasureInfoRealStage> findAll() throws InvalidParameterException 
     {
-        List<TableOneStage> batchTargetList = this.batchTargetRepository.findAll();
+        List<MeasureInfoRealStage> batchTargetList = this.batchTargetRepository.findAll();
 
         return batchTargetList;
     }
     
-    public void saveAll(List<TableOneStage> batchTargetList) throws InvalidParameterException 
+    public void saveAll(List<MeasureInfoRealStage> batchTargetList) throws InvalidParameterException 
     {
         this.batchTargetRepository.saveAll(batchTargetList);
     }

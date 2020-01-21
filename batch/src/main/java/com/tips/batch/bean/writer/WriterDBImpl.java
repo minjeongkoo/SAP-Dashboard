@@ -19,10 +19,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
+import com.tips.batch.annotation.ColumnMap;
 import com.tips.batch.model.BizVO;
 import com.tips.batch.model.FileWriteDTO;
 import com.tips.batch.model.ProcessorReceiveDTO;
-import com.tips.batch.model.entity.TableOneStage;
+import com.tips.batch.model.entity.MeasureInfoRealStage;
 import com.tips.batch.repository.BatchTargetRepository;
 import com.tips.batch.service.BatchTargetService;
 import com.tips.batch.service.impl.BatchTargetServiceImpl;
@@ -32,32 +33,54 @@ public class WriterDBImpl implements ItemWriter<List<ProcessorReceiveDTO>>
 {
     private static final Logger log = LoggerFactory.getLogger(WriterDBImpl.class);
     
-    private JdbcBatchItemWriter<TableOneStage> batchTargetWriter;
+    private JdbcBatchItemWriter<MeasureInfoRealStage> batchTargetWriter;
     
     BatchTargetServiceImpl batchTargetServiceImpl;
     
     SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
 
-    private static final String sql = "insert into public.table_one_stage                        "
-                                    + "(                                                         "
-                                    + "    column1 , column2 , column3 , column4 , column5       "
-                                    + "  , column6 , column7 , column8 , column9 , column10      "
-                                    + "  , column11, column12, column13, column14, column15      "
-                                    + "  , column16, column17, column18, column19, column20      "
-                                    + "  , column21, column22, column23, column24, column25      "
-                                    + "  , column26, column27, column28, column29, column30      "
-                                    + "  , column31, column32                                    "
-                                    + ")                                                         "
-                                    + "values                                                    "
-                                    + "(                                                         "
-                                    + "    :column1 , :column2 , :column3 , :column4 , :column5  "
-                                    + "  , :column6 , :column7 , :column8 , :column9 , :column10 "
-                                    + "  , :column11, :column12, :column13, :column14, :column15 "
-                                    + "  , :column16, :column17, :column18, :column19, :column20 "
-                                    + "  , :column21, :column22, :column23, :column24, :column25 "
-                                    + "  , :column26, :column27, :column28, :column29, :column30 "
-                                    + "  , :column31, :column32                                  "
-                                    + ")                                                         ";
+    private static final String sql = "insert into public.measure_info_real_stage "
+                                    + "(                                          "
+                                    + "    " + ColumnMap.column[ 0] + ",          "   
+                                    + "    " + ColumnMap.column[ 1] + ",          " 
+                                    + "    " + ColumnMap.column[ 2] + ",          " 
+                                    + "    " + ColumnMap.column[ 3] + ",          " 
+                                    + "    " + ColumnMap.column[ 4] + ",          " 
+                                    + "    " + ColumnMap.column[ 5] + ",          " 
+                                    + "    " + ColumnMap.column[ 6] + ",          " 
+                                    + "    " + ColumnMap.column[ 7] + ",          " 
+                                    + "    " + ColumnMap.column[ 8] + ",          " 
+                                    + "    " + ColumnMap.column[ 9] + ",          " 
+                                    + "    " + ColumnMap.column[10] + ",          " 
+                                    + "    " + ColumnMap.column[11] + ",          " 
+                                    + "    " + ColumnMap.column[12] + ",          " 
+                                    + "    " + ColumnMap.column[13] + ",          " 
+                                    + "    " + ColumnMap.column[14] + ",          " 
+                                    + "    " + ColumnMap.column[15] + ",          " 
+                                    + "    " + ColumnMap.column[16] + ",          " 
+                                    + "    " + ColumnMap.column[17] + ",          " 
+                                    + "    " + ColumnMap.column[18] + ",          " 
+                                    + "    " + ColumnMap.column[19] + ",          " 
+                                    + "    " + ColumnMap.column[20] + ",          " 
+                                    + "    " + ColumnMap.column[21] + ",          " 
+                                    + "    " + ColumnMap.column[22] + ",          " 
+                                    + "    " + ColumnMap.column[23] + ",          " 
+                                    + "    " + ColumnMap.column[24] + ",          " 
+                                    + "    " + ColumnMap.column[25] + ",          " 
+                                    + "    " + ColumnMap.column[26] + ",          " 
+                                    + "    " + ColumnMap.column[27] + ",          " 
+                                    + "    " + ColumnMap.column[28] + ",          " 
+                                    + "    " + ColumnMap.column[29] + ",          " 
+                                    + "    " + ColumnMap.column[30] + ",          " 
+                                    + "    " + ColumnMap.column[31] 
+                                    + ")                                                                                                             "
+                                    + "values                                                                                                        "
+                                    + "(                                                                                                             "
+                                    + "    :columnA1 , :columnA2 , :columnA3 , :columnA4 , :columnA5 , :columnA6 , :columnA7 , :columnA8 , :columnA9 "
+                                    + "  , :columnB1 , :columnB2 , :columnB3 , :columnB4 , :columnB5 , :columnB6 , :columnB7 , :columnB8 , :columnB9 "
+                                    + "  , :columnC1 , :columnC2 , :columnC3 , :columnC4 , :columnC5 , :columnC6 , :columnC7 , :columnC8 , :columnC9 "
+                                    + "  , :columnD1 , :columnD2 , :columnD3 , :columnD4 , :columnD5                                                 "
+                                    + ")                                                                                                             ";
     
     public WriterDBImpl()
     {
@@ -70,9 +93,9 @@ public class WriterDBImpl implements ItemWriter<List<ProcessorReceiveDTO>>
     @BeforeStep
     public void prepareForWriter()
     {
-        this.batchTargetWriter = new JdbcBatchItemWriter<TableOneStage>();
+        this.batchTargetWriter = new JdbcBatchItemWriter<MeasureInfoRealStage>();
         
-        this.batchTargetWriter.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<TableOneStage>());
+        this.batchTargetWriter.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<MeasureInfoRealStage>());
         this.batchTargetWriter.setDataSource(dataSource);
         this.batchTargetWriter.setJdbcTemplate(new NamedParameterJdbcTemplate(dataSource));
         this.batchTargetWriter.setSql(sql);
@@ -84,7 +107,7 @@ public class WriterDBImpl implements ItemWriter<List<ProcessorReceiveDTO>>
     {
         log.info("[WriterImplJpa] write() items : " + items.toString());
         
-        ArrayList <TableOneStage> batchTargetList = new ArrayList<TableOneStage>();
+        ArrayList <MeasureInfoRealStage> batchTargetList = new ArrayList<MeasureInfoRealStage>();
         
         for (List<ProcessorReceiveDTO> list : items)
         {
@@ -94,40 +117,40 @@ public class WriterDBImpl implements ItemWriter<List<ProcessorReceiveDTO>>
             {
                 log.info("[WriterImplJpa] write() record : " + record.toString());
                 
-                TableOneStage batchTarget = new TableOneStage();
+                MeasureInfoRealStage batchTarget = new MeasureInfoRealStage();
                 
-                batchTarget.setColumn1 (record.getColumn1 ());
-                batchTarget.setColumn2 (record.getColumn2 ());
-                batchTarget.setColumn3 (record.getColumn3 ());
-                batchTarget.setColumn4 (record.getColumn4 ());
-                batchTarget.setColumn5 (record.getColumn5 ());
-                batchTarget.setColumn6 (record.getColumn6 ());
-                batchTarget.setColumn7 (record.getColumn7 ());
-                batchTarget.setColumn8 (record.getColumn8 ());
-                batchTarget.setColumn9 (record.getColumn9 ());
-                batchTarget.setColumn10(record.getColumn10());
-                batchTarget.setColumn11(record.getColumn11());
-                batchTarget.setColumn12(record.getColumn12());
-                batchTarget.setColumn13(record.getColumn13());
-                batchTarget.setColumn14(record.getColumn14());
-                batchTarget.setColumn15(record.getColumn15());
-                batchTarget.setColumn16(record.getColumn16());
-                batchTarget.setColumn17(record.getColumn17());
-                batchTarget.setColumn18(record.getColumn18());
-                batchTarget.setColumn19(record.getColumn19());
-                batchTarget.setColumn20(record.getColumn20());
-                batchTarget.setColumn25(record.getColumn21());
-                batchTarget.setColumn25(record.getColumn22());
-                batchTarget.setColumn25(record.getColumn23());
-                batchTarget.setColumn25(record.getColumn24());
-                batchTarget.setColumn25(record.getColumn25());
-                batchTarget.setColumn25(record.getColumn26());
-                batchTarget.setColumn25(record.getColumn27());
-                batchTarget.setColumn25(record.getColumn28());
-                batchTarget.setColumn25(record.getColumn29());
-                batchTarget.setColumn25(record.getColumn30());
-                batchTarget.setColumn31(record.getColumn31());
-                batchTarget.setColumn32(record.getColumn32());
+                batchTarget.setColumnA1(record.getColumn1 ());
+                batchTarget.setColumnA2(record.getColumn2 ());
+                batchTarget.setColumnA3(record.getColumn3 ());
+                batchTarget.setColumnA4(record.getColumn4 ());
+                batchTarget.setColumnA5(record.getColumn5 ());
+                batchTarget.setColumnA6(record.getColumn6 ());
+                batchTarget.setColumnA7(record.getColumn7 ());
+                batchTarget.setColumnA8(record.getColumn8 ());
+                batchTarget.setColumnA9(record.getColumn9 ());
+                batchTarget.setColumnB1(record.getColumn10());
+                batchTarget.setColumnB2(record.getColumn11());
+                batchTarget.setColumnB3(record.getColumn12());
+                batchTarget.setColumnB4(record.getColumn13());
+                batchTarget.setColumnB5(record.getColumn14());
+                batchTarget.setColumnB6(record.getColumn15());
+                batchTarget.setColumnB7(record.getColumn16());
+                batchTarget.setColumnB8(record.getColumn17());
+                batchTarget.setColumnB9(record.getColumn18());
+                batchTarget.setColumnC1(record.getColumn19());
+                batchTarget.setColumnC2(record.getColumn20());
+                batchTarget.setColumnC3(record.getColumn21());
+                batchTarget.setColumnC4(record.getColumn22());
+                batchTarget.setColumnC5(record.getColumn23());
+                batchTarget.setColumnC6(record.getColumn24());
+                batchTarget.setColumnC7(record.getColumn25());
+                batchTarget.setColumnC8(record.getColumn26());
+                batchTarget.setColumnC9(record.getColumn27());
+                batchTarget.setColumnD1(record.getColumn28());
+                batchTarget.setColumnD2(record.getColumn29());
+                batchTarget.setColumnD3(record.getColumn30());
+                batchTarget.setColumnD4(record.getColumn31());
+                batchTarget.setColumnD5(record.getColumn32());
                 
                 batchTargetList.add(batchTarget);
             });
