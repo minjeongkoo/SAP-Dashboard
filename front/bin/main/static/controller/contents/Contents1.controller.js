@@ -8,6 +8,7 @@ sap.ui.define([
     {
         onInit : function ()
         {
+        	window.contents1 = this;
             console.log("Contents1.js OnInit()..");
             
             //this.callPublicApi();
@@ -21,7 +22,7 @@ sap.ui.define([
             
             console.log(JSON.stringify(oModel, null, 2));
             
-            var oData = oModel.getProperty("/result/frcstdustlist");
+            var oData = oModel.getProperty("/result/list");
             
             console.log("oData callbackFunction >>>> "+JSON.stringify(oData, null, 2));
             

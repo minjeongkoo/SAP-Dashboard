@@ -9,6 +9,44 @@ sap.ui.define([
 	"use strict";
 		
 	return BaseController.extend("OpenUI5.controller.common.BaseController", {
+		 dataPath : "/view/json",
+		 
+		 settingsModel : {
+	            dataset : {
+	                name: "Dataset",
+	                defaultSelected : 1,
+	                values : [{
+	                    name : "Small",
+	                    value : "/small.json"
+	                },{
+	                    name : "Medium",
+	                    value : "/medium.json"
+	                },{
+	                    name : "Large",
+	                    value : "/large.json"
+	                }]
+	            },
+	            series : {
+	                name : "Series",
+	                defaultSelected : 0,
+	                values : [{
+	                    name : "1 Series",
+	                    value : ["Revenue"]
+	                }, {
+	                    name : '2 Series',
+	                    value : ["Revenue", "Cost"]
+	                }]
+	            },
+	            dataLabel : {
+	                name : "Value Label",
+	                defaultState : true
+	            },
+	            axisTitle : {
+	                name : "Axis Title",
+	                defaultState : false
+	            }
+	        },
+
 		oVizFrame : null,
 		
 		onInit : function () {
@@ -46,14 +84,13 @@ sap.ui.define([
 	                    text: 'Revenue by City and Store Name'
 	                }
 	            });
-	            var dataModel = new JSONModel("./view/json/medium.json");
+	            var dataModel = new JSONModel(this.dataPath+"/medium.json");
 	            oVizFrame.setModel(dataModel);
 
 	            var oPopOver = this.getView().byId("idPopOver");
 	            oPopOver.connect(oVizFrame.getVizUid());
 	            oPopOver.setFormatString(formatPattern.STANDARDFLOAT);
-
-	            InitPageUtil.initPageSettings(this.getView());
+	            
 	            var that = this;
 	            dataModel.attachRequestCompleted(function() {
 	                that.dataSort(this.getData());
