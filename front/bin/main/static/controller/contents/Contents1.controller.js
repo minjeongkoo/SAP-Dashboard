@@ -8,39 +8,22 @@ sap.ui.define([
     {
         onInit : function ()
         {
-            console.log("Contents1333.js OnInit()..");
+            console.log("Contents1.js OnInit()..");
             
             //this.callPublicApi();
-            //this.localApi();
-            this.local1api();
+            this.localApi();
             
-            console.log("Contents2221.js OnInit() Afteraa..");
+            console.log("Contents1.js OnInit() Afteraa..");
         },
-        
         callbackFunction : function(oModel)
         {
             console.log("Content1.controller.js callbackFunction()");
             
             console.log(JSON.stringify(oModel, null, 2));
             
-            var oData = oModel.getProperty("/result/fineDustList");
-            
-            console.log("oData >>>> "+JSON.stringify(oData, null, 2));
-            
-            var oTable = this.byId("idTable");
-            
-            oTable.setModel(new JSONModel(oData));
-            oTable.setVisibleRowCount(oData.length);
-        },
-        callbackFunction1 : function(oModel)
-        {
-            console.log("Content1_test.controller.js callbackFunction111()");
-            
-            console.log(JSON.stringify(oModel, null, 2));
-            
             var oData = oModel.getProperty("/result/frcstdustlist");
             
-            console.log("oData >>>> "+JSON.stringify(oData, null, 2));
+            console.log("oData callbackFunction >>>> "+JSON.stringify(oData, null, 2));
             
             var oTable = this.byId("idTable");
             
@@ -102,18 +85,6 @@ sap.ui.define([
                        + "&" +  "_returnType=" + returnType;
           
             this.callAjax2(oParam);
-        },
-        local1api : function()
-        {
-            var oParam = {
-                url     : "http://localhost:8081/list",
-                type    : "GET",
-                data    : "",
-                callback: "callbackFunction1",
-                error   : "errorCallbackFunction"
-            };
-            
-            this.callAjax(oParam);
-        },
+        }
     });
 }, true);
