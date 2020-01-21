@@ -7,7 +7,7 @@
 >
     <!-- <mvc:XMLView id="headerView" viewName="OpenUI5.view.frame.Header" height="10%" class="BORDER_BLUE"/> -->
 
-    <ScrollContainer height="100%">
+    <ScrollContainer height="100%" class="resposiveMaster">
         <l:FixFlex vertical="false">
             <l:fixContent>
                 <mvc:XMLView id="leftView" class="leftView" viewName="OpenUI5.view.frame.Left"/>
