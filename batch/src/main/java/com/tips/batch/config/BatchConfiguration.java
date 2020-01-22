@@ -128,7 +128,7 @@ public class BatchConfiguration
         return jobBuilderFactory.get("ETLJob")                       // Share Quartz Configuration
                                 .incrementer(runIdIncrementer   ())  // Automatically parameter increase
                               //.listener   (listenerFlatFileExt())  // Must be Bean
-                              //.listener   (listenerDBExt      ())
+                                .listener   (listenerDBExt      ())
                                 .flow       (stepBean())
                                 .end()
                                 .build();
