@@ -57,7 +57,7 @@ public class ProcessorImpl implements ItemProcessor<List<ReaderReturnDTO>, List<
             ProcessorReceiveDTOObj.setColumn31(record.getColumn31());
             ProcessorReceiveDTOObj.setColumn32(record.getColumn32());
             
-            log.info("[ProcessorImpl] process() ProcessorReceiveDTOObj : " + ProcessorReceiveDTOObj.toString());
+            //log.info("[ProcessorImpl] process() ProcessorReceiveDTOObj : " + ProcessorReceiveDTOObj.toString());
             
             processorReceiveDTO.add(ProcessorReceiveDTOObj);
         }

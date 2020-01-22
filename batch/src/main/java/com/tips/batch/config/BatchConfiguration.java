@@ -18,6 +18,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 
+import com.tips.batch.bean.DummyClass;
+import com.tips.batch.bean.listener.ListenerDBExt;
 import com.tips.batch.bean.listener.ListenerFlatFileExt;
 import com.tips.batch.bean.processor.ProcessorImpl;
 import com.tips.batch.bean.reader.ReaderDummyImpl;
@@ -25,10 +27,11 @@ import com.tips.batch.bean.reader.ReaderFlatFileExt;
 import com.tips.batch.bean.reader.ReaderRestApiImpl;
 import com.tips.batch.bean.writer.WriterDBImpl;
 import com.tips.batch.bean.writer.WriterDTOImpl;
-import com.tips.batch.model.BizVO;
 import com.tips.batch.model.ProcessorReceiveDTO;
 import com.tips.batch.model.ReaderReturnDTO;
-import com.tips.batch.model.entity.TableOneStage;
+import com.tips.batch.model.entity.MeasureInfoRealStage;
+import com.tips.batch.model.vo.BizVO;
+import com.tips.batch.model.vo.MeasureInfoVO;
 
 /**
  * 
@@ -50,6 +53,12 @@ public class BatchConfiguration
     public BizVO bizVO()
     {
         return new BizVO();
+    }
+
+    @Bean
+    public MeasureInfoVO measureInfoVO()
+    {
+        return new MeasureInfoVO();
     }
     
     // Reader ----------------------------------------------------------------
@@ -97,12 +106,18 @@ public class BatchConfiguration
     {
         return new ListenerFlatFileExt();
     }
+
+    @Bean
+    public ListenerDBExt listenerDBExt()
+    {
+        return new ListenerDBExt();
+    }
     
     // RunIncreamenter -------------------------------------------------------
     @Bean
     public RunIdIncrementer runIdIncrementer()
     {
-    	return new RunIdIncrementer();
+        return new RunIdIncrementer();
     }
     
     // Job Step Configuration ------------------------------------------------
@@ -112,7 +127,8 @@ public class BatchConfiguration
     {
         return jobBuilderFactory.get("ETLJob")                       // Share Quartz Configuration
                                 .incrementer(runIdIncrementer   ())  // Automatically parameter increase
-                                .listener   (listenerFlatFileExt())  // Must be Bean
+                              //.listener   (listenerFlatFileExt())  // Must be Bean
+                                .listener   (listenerDBExt      ())
                                 .flow       (stepBean())
                                 .end()
                                 .build();
@@ -121,13 +137,10 @@ public class BatchConfiguration
     @Bean
     public Step stepBean()
     {
-        // The job is thus scheduled to run every 2 minute. In fact it should
-        // be successful on the first attempt, so the second and subsequent
-        // attempts should through a JobInstanceAlreadyCompleteException, so you have to set allowStartIfComplete to true
         return stepBuilderFactory.get("ETLStep")
                                  .allowStartIfComplete(true)                                      // allows step re-runnig although there is job that success
                                //.<     ReaderReturnDTO,       ProcessorReceiveDTO>  chunk(1000)  // First:Reader return type. Second:Writer receive type
-                                 .<List<ReaderReturnDTO>, List<ProcessorReceiveDTO>> chunk(1)     // First:Reader return type. Second:Writer receive type
+                                 .<List<ReaderReturnDTO>, List<ProcessorReceiveDTO>> chunk(1000)  // First:Reader return type. Second:Writer receive type
                                //.reader   (readerFlatFileExt())
                                //.reader   (readerDummyImpl  ())
                                  .reader   (readerRestApiImpl())

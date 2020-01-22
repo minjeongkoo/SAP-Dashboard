@@ -56,7 +56,7 @@ public class QuartzConfiguration
         jobfactory.setJobDataAsMap(map);
         jobfactory.setGroup("etl_group");
         jobfactory.setName("etl_job");
-        
+
         return jobfactory;
     }
 
