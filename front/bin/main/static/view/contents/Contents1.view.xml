@@ -68,29 +68,31 @@
 			<!-- Table Area -->
 			<VBox>
 				<Text 		text="Detail Information" class="subTitle"/>
-				<t:Table 	id="idTable"
-         					selectionMode="None"
-         					rows="{/}"
-         					visibleRowCount="auto"
-         					width="100%">
-				    <t:columns>
-				        <t:Column resizable="true" hAlign="Center" width="150px"><Label text="측정일"           				/><t:template><Text text="{datatime}"></Text></t:template></t:Column>
-				        <t:Column resizable="true" hAlign="Center" width="100px"><Label text="측정소"           				/><t:template><Text text="{stationname}"></Text></t:template></t:Column>
-				        <t:Column resizable="true" hAlign="Center" width="100px"><Label text="측정망"           				/><t:template><Text text="{mangname}"></Text></t:template></t:Column>
-				        <t:Column resizable="true" hAlign="Center" width="150px"><Label text="통합대기환경수치"     				/><t:template><Text text="{khaivalue}"></Text></t:template></t:Column>
-				        <t:Column resizable="true" hAlign="Center" width="150px"><Label text="통합대기환경지수"     				/><t:template><Text text="{khaigrade}"></Text></t:template></t:Column>
-				      	<t:Column resizable="true" hAlign="Center" width="150px"><Label text="미세먼지(PM10)농도"				/><t:template><Text text="{pm10value}"></Text></t:template></t:Column>
-				        <t:Column resizable="true" hAlign="Center" width="100px"><Label text="(PM10)24시간예측이동농도"     /><t:template><Text text="{pm10value24}"></Text></t:template></t:Column>
-				        <t:Column resizable="true" hAlign="Center" width="100px"><Label text="(PM10)등급"         		/><t:template><Text text="{pm10grade}"></Text></t:template></t:Column>
-				        <t:Column resizable="true" hAlign="Center" width="100px"><Label text="(PM10)1시간 등급"     		/><t:template><Text text="{pm10grade1h}"></Text></t:template></t:Column>
-				        <t:Column resizable="true" hAlign="Center" width="100px"><Label text="오존 농도"         				/><t:template><Text text="{o3value}"></Text></t:template></t:Column>
-				        <t:Column resizable="true" hAlign="Center" width="100px"><Label text="오존지수"     					/><t:template><Text text="{o3grade}"></Text></t:template></t:Column>
-				     
-				    </t:columns>
-				</t:Table>
-				
+				<VBox>
+					<t:Table 	id="idTable"
+	         					selectionMode="None"
+	         					rows="{/}"
+	         					visibleRowCount="10"
+	         					class="detailInfoTable"
+	         					width="100%">
+					    <t:columns>
+					        <t:Column resizable="true" hAlign="Center" width="150px"><Label text="측정일"           				/><t:template><Text text="{datatime}"></Text></t:template></t:Column>
+					        <t:Column resizable="true" hAlign="Center" width="100px"><Label text="측정소"           				/><t:template><Text text="{stationname}"></Text></t:template></t:Column>
+					        <t:Column resizable="true" hAlign="Center" width="100px"><Label text="측정망"           				/><t:template><Text text="{mangname}"></Text></t:template></t:Column>
+					        <t:Column resizable="true" hAlign="Center" width="150px"><Label text="통합대기환경수치"     				/><t:template><Text text="{khaivalue}"></Text></t:template></t:Column>
+					        <t:Column resizable="true" hAlign="Center" width="150px"><Label text="통합대기환경지수"     				/><t:template><Text text="{khaigrade}"></Text></t:template></t:Column>
+					      	<t:Column resizable="true" hAlign="Center" width="150px"><Label text="미세먼지(PM10)농도"				/><t:template><Text text="{pm10value}"></Text></t:template></t:Column>
+					        <t:Column resizable="true" hAlign="Center" width="100px"><Label text="(PM10)24시간예측이동농도"     /><t:template><Text text="{pm10value24}"></Text></t:template></t:Column>
+					        <t:Column resizable="true" hAlign="Center" width="100px"><Label text="(PM10)등급"         		/><t:template><Text text="{pm10grade}"></Text></t:template></t:Column>
+					        <t:Column resizable="true" hAlign="Center" width="100px"><Label text="(PM10)1시간 등급"     		/><t:template><Text text="{pm10grade1h}"></Text></t:template></t:Column>
+					        <t:Column resizable="true" hAlign="Center" width="100px"><Label text="오존 농도"         				/><t:template><Text text="{o3value}"></Text></t:template></t:Column>
+					        <t:Column resizable="true" hAlign="Center" width="100px"><Label text="오존지수"     					/><t:template><Text text="{o3grade}"></Text></t:template></t:Column>
+					     
+					    </t:columns>
+					</t:Table>
+				</VBox>
+	
 			</VBox>
-			
 			
 			</l:HorizontalLayout>
 			

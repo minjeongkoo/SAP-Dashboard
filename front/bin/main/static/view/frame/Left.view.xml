@@ -9,16 +9,16 @@
 
     <l:HorizontalLayout>
         <l:content>
-            <VBox class="responsiveMasterLeftview">
+            <VBox>
                 <Image              class="mvpLogoType"     src="/images/Logo.png"/>
                 <l:VerticalLayout   class="menuListBox">
                 <!-- Quick Start -->
-                    <VBox>
+                    <VBox class="responsiveMenu">
                         <l:HorizontalLayout>
                             <Image  src="/images/Ico_List.png"/>
                             <Text   text="Quick Start"	class="subTitle"/>
                         </l:HorizontalLayout>
-                        <Button     id="contents1"  text="Air Pollution"    press=".onNavToContent1" class="btnLeftList"/>
+                        <Button     id="contents1"  text="Air Pollution"      press=".onNavToContent1" class="btnLeftList"/>
                         <Button     id="contents2"  text="Case Studies 2"     press=".onNavToContent2" class="btnLeftList"/>
                         <Button     id="contents3"  text="Case Studies 3"     press=".onNavToContent3" class="btnLeftList"/>
                     </VBox>
