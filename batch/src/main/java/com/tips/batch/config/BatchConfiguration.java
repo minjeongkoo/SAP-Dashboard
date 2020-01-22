@@ -1,4 +1,4 @@
-package com.tips.batch.config;
+    package com.tips.batch.config;
 
 import java.util.List;
 
@@ -33,10 +33,6 @@ import com.tips.batch.model.entity.MeasureInfoRealStage;
 import com.tips.batch.model.vo.BizVO;
 import com.tips.batch.model.vo.MeasureInfoVO;
 
-/**
- * 
- * @author ashraf
- */
 @Configuration
 @EnableBatchProcessing
 @Import({QuartzConfiguration.class})
