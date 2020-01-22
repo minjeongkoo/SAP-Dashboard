@@ -38,9 +38,9 @@ sap.ui.define([
 				    else {
 				    	
 				    	// "PC" 	DEVICE TYPE + SETTING META INFO
-				    	var fullScreenArea 	= 	document.getElementById('content');
+				    	/*var fullScreenArea 	= 	document.getElementById('content');
 				        this.fullscreen 	= 	fullScreenArea;
-				        /*this.layoutControll.fullscreen.requestFullscreen(); */ 
+				        this.layoutControll.fullscreen.requestFullscreen(); */
 				    	
 				    }
 				}
