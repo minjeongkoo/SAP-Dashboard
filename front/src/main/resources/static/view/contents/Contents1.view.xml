@@ -22,22 +22,21 @@
 					<!-- Card List & Chart -->
 					<VBox>
 						<Text text="지역별 미세먼지" class="subTitle" />
-						<HBox class="chartArea" />
-						<viz:Popover id="idPopOver"></viz:Popover>
-						<viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}" height='100%' width="100%" vizType='bar'>
+						<!-- <HBox class="chartArea" />-->
+						<viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}" height='500px' width="500px" vizType='bar'>
                 			<viz:dataset>
-                    			<viz.data:FlattenedDataset data="{chart>/list}">
+                    			<viz.data:FlattenedDataset data="{/list}">
 	                        		<viz.data:dimensions>
-	                            		<viz.data:DimensionDefinition name="stationName" value="{stationName}" />
+	                            		<viz.data:DimensionDefinition name="stationName" value="{station_name}" />
 	                        		</viz.data:dimensions>
 	                        		<viz.data:measures>
-	                            		<viz.data:MeasureDefinition id="pmvalue" name="pm10value" value="{khaiValue}" />
+	                            		<viz.data:MeasureDefinition name="pm10value" value="{so2_value}" />
 	                        		</viz.data:measures>
                     			</viz.data:FlattenedDataset>
                 			</viz:dataset>
                 			<viz:feeds>
-                    			<viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure" values="{pmvalue}" />
-                    			<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="{stationName}" />
+                    			<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="pm10value" />
+                    			<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="stationName" />
                 			</viz:feeds>
             			</viz:VizFrame>
 												
@@ -95,43 +94,43 @@
 								<t:Column resizable="true" hAlign="Center" width="150px">
 									<Label text="측정일" />
 									<t:template>
-										<Text text="{datatime}"></Text>
+										<Text text="{data_time}"></Text>
 									</t:template>
 								</t:Column>
 								<t:Column resizable="true" hAlign="Center" width="100px">
 									<Label text="측정소" />
 									<t:template>
-										<Text text="{stationname}"/>
+										<Text text="{station_name}"/>
 									</t:template>
 								</t:Column>
 								<t:Column resizable="true" hAlign="Center" width="100px">
 									<Label text="측정망" />
 									<t:template>
-										<Text text="{mangname}"/>
+										<Text text="{mang_name}"/>
 									</t:template>
 								</t:Column>
 								<t:Column resizable="true" hAlign="Center" width="150px">
 									<Label text="통합대기환경수치" />
 									<t:template>
-										<Text text="{khaivalue}"></Text>
+										<Text text="{khai_value}"></Text>
 									</t:template>
 								</t:Column>
 								<t:Column resizable="true" hAlign="Center" width="150px">
 									<Label text="통합대기환경지수" />
 									<t:template>
-										<Text text="{khaigrade}"></Text>
+										<Text text="{khai_grade}"></Text>
 									</t:template>
 								</t:Column>
 								<t:Column resizable="true" hAlign="Center" width="100px">
 									<Label text="오존 농도" />
 									<t:template>
-										<Text text="{o3value}"></Text>
+										<Text text="{o3_value}"></Text>
 									</t:template>
 								</t:Column>
 								<t:Column resizable="true" hAlign="Center" width="100px">
 									<Label text="오존지수" />
 									<t:template>
-										<Text text="{o3grade}"></Text>
+										<Text text="{o3_grade}"></Text>
 									</t:template>
 								</t:Column>
 							</t:columns>

@@ -10,32 +10,75 @@ sap.ui.define([
         
     return BaseController.extend("OpenUI5.controller.common.BaseController",
     {
-    	 dataPath : "/view/json",
-    	
         onInit : function ()
         {
         	window.contents1 = this;
-            console.log("Contents1.js OnInit()..");
-            //this.callPublicApi();
             this.localApi();
-            console.log("Contents1.js OnInit() Afteraa..");
         },
         callbackFunction : function(oModel)
         {
-            //console.log("Content1.controller.js callbackFunction()");
-            
             //console.log(JSON.stringify(oModel, null, 2));
             
-            //var oData = oModel.getProperty("/result/list");
-            var oData = oModel.getProperty("/list");
+            var oData = oModel.getProperty("/result/list");
             //console.log("oData callbackFunction >>>> "+JSON.stringify(oData, null, 2));
                         
             var oTable = this.byId("idTable");
-            
             oTable.setModel(new JSONModel(oData));
-            oTable.setVisibleRowCount(oData.length);      
+            oTable.setVisibleRowCount(oData.length);
+            this.oTableAfterRendering();
         },
-        
+        oTableAfterRendering : function(){
+        	this.charMeasureNameApi();
+        },
+        chartCallbackFunction : function(oChartModel){
+        	   	
+        	Format.numericFormatter(ChartFormatter.getInstance());
+            var formatPattern = ChartFormatter.DefaultPattern;
+
+            var oVizFrame = this.oVizFrame = this.getView().byId("idVizFrame");
+            oVizFrame.setVizProperties({
+                plotArea: {
+                    dataLabel: {
+                        formatString: formatPattern.SHORTFLOAT_MFD2,
+                        visible: true
+                    }
+                },
+                valueAxis: {
+                    label: {
+                        formatString: formatPattern.SHORTFLOAT
+                    },
+                    title: {
+                        visible: false
+                    }
+                },
+                categoryAxis: {
+                    title: {
+                        visible: false
+                    }
+                },
+                title: {
+                    visible: false,
+                    text: 'Revenue by City and Store Name'
+                }
+            });
+            console.log("chartModel11>>>> "+JSON.stringify(oChartModel, null, 2));
+            var oChartData = oChartModel.getProperty("/result");
+            
+            console.log("chartModel22>>>> " +JSON.stringify(oChartData, null, 2));
+            oVizFrame.setModel(new JSONModel(oChartData));
+            //var aaa = new JSONModel(oChartData)
+            //oVizFrame.setModel(new JSONModel(oChartData));
+
+        /*    var oPopOver = this.getView().byId("idPopOver");
+            oPopOver.connect(oVizFrame.getVizUid());
+            oPopOver.setFormatString(formatPattern.STANDARDFLOAT);*/
+            
+           /* var that = this;
+            dataModel.attachRequestCompleted(function() {
+                that.dataSort(this.getData());
+            });*/
+        },
+              
         errorCallbackFunction : function()
         {
             console.log("error callback");
@@ -90,6 +133,19 @@ sap.ui.define([
                        + "&" +  "_returnType=" + returnType;
           
             this.callAjax2(oParam);
-        }
+        },
+        //측정소별 Chart
+        charMeasureNameApi : function()
+        {
+            var oParam = {
+                url     : "http://localhost:8081/list/so2?sido_name=서울&mang_name=도시대기",
+                type    : "GET",
+                callback: "chartCallbackFunction",
+                error   : "errorCallbackFunction"
+            };
+            
+            this.callAjax(oParam);
+        },
+        
     });
 }, true);
