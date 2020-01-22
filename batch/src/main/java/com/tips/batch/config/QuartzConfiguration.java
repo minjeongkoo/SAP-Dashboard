@@ -16,11 +16,6 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 import com.tips.batch.quartz.QuartzJob;
 
-/**
- * The Class QuartzConfiguration.
- *
- * @author ashraf
- */
 @Configuration
 public class QuartzConfiguration
 {
