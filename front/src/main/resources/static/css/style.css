@@ -28,6 +28,7 @@ div					{ transition: ALL 0.5s;																		}
 					}												
 .sapViewInner 		{ display: block	; 	position: relative	; 		padding: 64px; 							}
 .sapViewInner>div	{ display: block	; 																		}
+.sapViewInner>div	{ display: block	; 																		}
 
 .noselect 			{ -webkit-touch-callout: none	; 	-webkit-user-select: none	 ;
 					  -khtml-user-select: none		; 	-moz-user-select: none		 ; 
@@ -134,7 +135,12 @@ button:hover 	{ transform: translateY(2px)	; 															}
   .leftView {
     width: 100%;
   }
+  
+  .titleArea {
+  	display: block;
+  }
 
+	/* THIS IS LEFT MENU CONTROLL CLASS [responsiveMasterLeftview] */
   .responsiveMasterLeftview {
     display: flex;
     justify-content: space-between;
@@ -145,17 +151,11 @@ button:hover 	{ transform: translateY(2px)	; 															}
     margin-top: 1%;
   }
 
-  .sapViewInner div {
-    width: auto;
-    display: block;
-  }
-
-  .contentArea >div:nth-child(1) {
-    width: 100% !important;
-    min-width: 100% !important;
-  }
-
+  .sapUiHLayoutChildWrapper 		{ width: auto	; 															}
+  .contentArea 						{ display: block; 															}
+  .contentArea >div:nth-child(1) 	{ display: block; 	width: 100% !important;		min-width: 100% !important; }
   .contentArea >div:nth-child(2) {
+  	display: inline-block;
     width: 100% !important;
     min-width: 100% !important;
     margin-left: 0 !important;
