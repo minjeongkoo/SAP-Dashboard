@@ -3,6 +3,7 @@ package com.tips.back.service.impl;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -117,5 +118,31 @@ public class MeasureInfoRealEntityServiceImpl implements MeasureInfoRealEntitySe
         measureInfoRealJsonList.setMeasureInfoRealJsonList(measureInfoRealJsonListObj);;
         
         return measureInfoRealJsonList;
-    };
+    }
+    
+    public MeasureInfoRealJsonList findSO2ValuesOnlyEntity(String sidoName, String mangName) throws InvalidParameterException{
+        MeasureInfoRealJsonList measureInfoRealJsonList = new MeasureInfoRealJsonList();
+        
+        // Retune value
+        ArrayList<MeasureInfoRealJson> measureInfoRealJsonListObj = new ArrayList<MeasureInfoRealJson>();
+        
+        List<Map<String, String>> so2ValuesOnlyByJPA = this.measureInfoRealRepository.findBySindonameAndMangname(sidoName, mangName);
+        // JPA return value
+        for(Map<String, String> so2ValuesOnlyEntity : so2ValuesOnlyByJPA)
+        {
+            MeasureInfoRealJson measureInfoRealJsonObj = new MeasureInfoRealJson();
+            
+            measureInfoRealJsonObj.setDatatime      (so2ValuesOnlyEntity.get("data_time"));
+            measureInfoRealJsonObj.setSidoname      (so2ValuesOnlyEntity.get("sido_name"));
+            measureInfoRealJsonObj.setStationname   (so2ValuesOnlyEntity.get("station_name"));
+            measureInfoRealJsonObj.setMangname      (so2ValuesOnlyEntity.get("mang_name"));
+            measureInfoRealJsonObj.setSo2value      (so2ValuesOnlyEntity.get("so2_value"));
+            
+            measureInfoRealJsonListObj.add(measureInfoRealJsonObj);
+        }
+          
+        measureInfoRealJsonList.setMeasureInfoRealJsonList(measureInfoRealJsonListObj);
+        
+        return measureInfoRealJsonList;    	
+    }
 }

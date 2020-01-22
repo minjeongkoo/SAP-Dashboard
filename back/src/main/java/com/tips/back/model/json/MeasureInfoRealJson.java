@@ -9,7 +9,7 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MeasureInfoRealJson
 {
-	@JsonProperty("id") private long id;
+	@JsonProperty("id") private Long id;
 	@JsonProperty("data_time") private String datatime;
 	@JsonProperty("sido_name") private String sidoname;
 	@JsonProperty("station_name") private String stationname;

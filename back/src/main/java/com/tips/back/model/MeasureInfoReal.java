@@ -19,7 +19,7 @@ public class MeasureInfoReal implements Serializable
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id") private long id;
+    @Column(name="id") private Long id;
     
     @Column(name="data_time") private String datatime;
     @Column(name="sido_name") private String sidoname;

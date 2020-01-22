@@ -11,4 +11,6 @@ public interface MeasureInfoRealEntityService
     public MeasureInfoRealJsonList findMeasureInfoRealEntity() throws InvalidParameterException;
     
     public MeasureInfoRealJsonList findMeasureInfoRealEntity(Pageable pageable) throws InvalidParameterException;
+    
+    public MeasureInfoRealJsonList findSO2ValuesOnlyEntity(String sidoName, String mangName) throws InvalidParameterException;
 }
