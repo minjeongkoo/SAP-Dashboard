@@ -61,6 +61,6 @@ public class MeasureInfoReal implements Serializable
   //@Column(name = "ver"           ) private String columnD5;
 
     //@Column(insertable=false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    //private String createData;
+    //private String createDate;
 }
     

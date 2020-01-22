@@ -113,11 +113,11 @@ public class WriterDBImpl implements ItemWriter<List<ProcessorReceiveDTO>>
         
         for (List<ProcessorReceiveDTO> list : items)
         {
-            log.info("[WriterImplJpa] write() list : " + list.toString());
+            //log.info("[WriterImplJpa] write() list : " + list.toString());
             
             list.forEach(record ->
             {
-                log.info("[WriterImplJpa] write() record : " + record.toString());
+                //log.info("[WriterImplJpa] write() record : " + record.toString());
                 
                 MeasureInfoRealStage batchTarget = new MeasureInfoRealStage();
                 

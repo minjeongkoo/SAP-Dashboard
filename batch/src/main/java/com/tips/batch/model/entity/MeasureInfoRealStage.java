@@ -60,7 +60,7 @@ public class MeasureInfoRealStage implements Serializable
     @Column(name = "total_count "  ) private String columnD4;
     @Column(name = "ver"           ) private String columnD5;
 
-    //@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    //private String createData;
+    @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private String createDate;
 }
     
