@@ -60,12 +60,12 @@ public class BackController
      * 		# 도로변대기
      */
     @GetMapping("/list/so2")
-    public RestResponseEntity<MeasureInfoRealJsonList> findSO2ValueInfoReal(
+    public RestResponseEntity<MeasureInfoRealJsonList> findSO2ValuesOnly(
     		@RequestParam("sido_name") String sidoName, @RequestParam("mang_name") String mangName)
     {
     	RestResponseEntity<MeasureInfoRealJsonList> result = null;
     	
-    	result = new RestResponseEntity<MeasureInfoRealJsonList>(this.measureInfoRealEntityService.findSO2ValueInfoRealEntity(sidoName, mangName));
+    	result = new RestResponseEntity<MeasureInfoRealJsonList>(this.measureInfoRealEntityService.findSO2ValuesOnlyEntity(sidoName, mangName));
     	
     	return result;
     }
