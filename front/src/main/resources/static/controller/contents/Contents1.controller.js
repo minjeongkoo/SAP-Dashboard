@@ -1,35 +1,39 @@
 sap.ui.define([
-    "OpenUI5/controller/common/BaseController",
-    "sap/ui/model/json/JSONModel"
-], function(BaseController, JSONModel) {
+	"OpenUI5/controller/common/BaseController",
+	'sap/ui/core/mvc/Controller',
+    'sap/ui/model/BindingMode',
+    'sap/ui/model/json/JSONModel',
+    'sap/viz/ui5/format/ChartFormatter',
+    'sap/viz/ui5/api/env/Format'
+], function(BaseController,Controller ,BindingMode ,JSONModel ,ChartFormatter ,Format) {
     "use strict";
         
     return BaseController.extend("OpenUI5.controller.common.BaseController",
     {
+    	 dataPath : "/view/json",
+    	
         onInit : function ()
         {
         	window.contents1 = this;
             console.log("Contents1.js OnInit()..");
-            
             //this.callPublicApi();
             this.localApi();
-            
             console.log("Contents1.js OnInit() Afteraa..");
         },
         callbackFunction : function(oModel)
         {
-            console.log("Content1.controller.js callbackFunction()");
+            //console.log("Content1.controller.js callbackFunction()");
             
-            console.log(JSON.stringify(oModel, null, 2));
+            //console.log(JSON.stringify(oModel, null, 2));
             
-            var oData = oModel.getProperty("/result/list");
-            
-            console.log("oData callbackFunction >>>> "+JSON.stringify(oData, null, 2));
-            
+            //var oData = oModel.getProperty("/result/list");
+            var oData = oModel.getProperty("/list");
+            //console.log("oData callbackFunction >>>> "+JSON.stringify(oData, null, 2));
+                        
             var oTable = this.byId("idTable");
             
             oTable.setModel(new JSONModel(oData));
-            oTable.setVisibleRowCount(oData.length);
+            oTable.setVisibleRowCount(oData.length);      
         },
         
         errorCallbackFunction : function()
