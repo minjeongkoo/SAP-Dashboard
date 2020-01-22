@@ -31,7 +31,7 @@ sap.ui.define([
 				
 				    	// "MOBILE" DEVICE TYPE + SETTING META INFO
 				        var metaInfo 		= 	document.getElementsByTagName('meta').viewport;
-				        metaInfo.content 	= 	"width=device-width, initial-scale=0.3, user-scalable=no";
+				        metaInfo.content 	= 	"width=device-width, initial-scale=0.5, user-scalable=no";
 				        
 				        
 				    }

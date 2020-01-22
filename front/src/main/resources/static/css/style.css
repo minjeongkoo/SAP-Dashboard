@@ -116,8 +116,8 @@ button:hover 	{ transform: translateY(2px)	; 															}
   }
 
   .resposiveMaster .sapUiFixFlexFixed {
+  	width: 100%;
     background: #4F5B62;
-    width: 100%;
     height: 72px;
     display: flex;
     display: flex;
@@ -128,7 +128,7 @@ button:hover 	{ transform: translateY(2px)	; 															}
   .mvpLogoType {
     height: 50px !important;
     width: auto !important;
-    margin: 0 !important;
+    margin: 10px 0 !important;
   }
 
   .leftView {
@@ -141,8 +141,7 @@ button:hover 	{ transform: translateY(2px)	; 															}
   }
 
   .responsiveMasterLeftview >div {
-    display: inline-flex;
-    width: 50%;
+    display: block;
     margin-top: 1%;
   }
 
@@ -171,7 +170,7 @@ button:hover 	{ transform: translateY(2px)	; 															}
   }
 
   .menuListBox {
-    display: none;
+    background: red;
   }
 }
 
