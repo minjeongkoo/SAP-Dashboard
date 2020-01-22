@@ -3,11 +3,6 @@ package com.tips.batch.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-/**
- * The Class StockPriceDetails.
- *
- * @author ashraf
- */
 @Data
 @AllArgsConstructor
 public class FileWriteDTO

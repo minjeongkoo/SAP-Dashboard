@@ -17,11 +17,9 @@ import org.springframework.batch.core.listener.JobExecutionListenerSupport;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.tips.batch.model.BizVO;
 import com.tips.batch.model.FileWriteDTO;
-import com.tips.batch.model.entity.TableOneStage;
-import com.tips.batch.repository.BatchTargetRepository;
-import com.tips.batch.service.BatchTargetService;
+import com.tips.batch.model.entity.MeasureInfoRealStage;
+import com.tips.batch.model.vo.BizVO;
 
 public class ListenerFlatFileExt extends JobExecutionListenerSupport
 {
@@ -29,9 +27,7 @@ public class ListenerFlatFileExt extends JobExecutionListenerSupport
     private static final String HEADER    = "stock,open,close,low,high";
     private static final String LINE_DILM = ",";
 
-    BatchTargetService    batchTargetService   ;
-    BatchTargetRepository batchTargetRepository;
-    
+   
     //JdbcBatchItemWriter<BatchTarget> databaseItemWriter = new JdbcBatchItemWriter<>();
     
     @Autowired
@@ -44,7 +40,7 @@ public class ListenerFlatFileExt extends JobExecutionListenerSupport
     	
         if (jobExecution.getStatus() == BatchStatus.COMPLETED)
         {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat ("yyyyMMddHHmmss");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
             Date             date             = new Date();
             
             String createTime = simpleDateFormat.format(date);
