@@ -8,12 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.TemporalType;
-
-import org.eclipse.persistence.annotations.Customizer;
-import org.hibernate.annotations.Generated;
-import org.springframework.data.jpa.repository.Temporal;
-
 
 import lombok.Data;
 

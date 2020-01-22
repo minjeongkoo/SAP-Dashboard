@@ -3,6 +3,7 @@ package com.tips.back.service.impl;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tips.back.model.MeasureInfoReal;
-import com.tips.back.model.SO2ValueInfoReal;
 import com.tips.back.model.json.MeasureInfoRealJson;
 import com.tips.back.model.json.MeasureInfoRealJsonList;
 import com.tips.back.repository.MeasureInfoRealEntityRepository;
@@ -120,24 +120,23 @@ public class MeasureInfoRealEntityServiceImpl implements MeasureInfoRealEntitySe
         return measureInfoRealJsonList;
     }
     
-    public MeasureInfoRealJsonList findSO2ValueInfoRealEntity(String sidoName, String mangName) throws InvalidParameterException{
+    public MeasureInfoRealJsonList findSO2ValuesOnlyEntity(String sidoName, String mangName) throws InvalidParameterException{
         MeasureInfoRealJsonList measureInfoRealJsonList = new MeasureInfoRealJsonList();
         
         // Retune value
         ArrayList<MeasureInfoRealJson> measureInfoRealJsonListObj = new ArrayList<MeasureInfoRealJson>();
         
-        List<SO2ValueInfoReal> so2ValueInfoRealByJPA = 
-        		this.measureInfoRealRepository.findSO2ValueInfoRealBySidonameAndMangname(sidoName, mangName);
+        List<Map<String, String>> so2ValuesOnlyByJPA = this.measureInfoRealRepository.findBySindonameAndMangname(sidoName, mangName);
         // JPA return value
-        for(SO2ValueInfoReal so2ValueInfoRealEntity : so2ValueInfoRealByJPA)
+        for(Map<String, String> so2ValuesOnlyEntity : so2ValuesOnlyByJPA)
         {
             MeasureInfoRealJson measureInfoRealJsonObj = new MeasureInfoRealJson();
             
-            measureInfoRealJsonObj.setDatatime      (so2ValueInfoRealEntity.getDatatime   ());
-            measureInfoRealJsonObj.setSidoname      (so2ValueInfoRealEntity.getSidoname   ());
-            measureInfoRealJsonObj.setStationname   (so2ValueInfoRealEntity.getStationname());
-            measureInfoRealJsonObj.setMangname      (so2ValueInfoRealEntity.getMangname   ());
-            measureInfoRealJsonObj.setSo2value      (so2ValueInfoRealEntity.getSo2value   ());
+            measureInfoRealJsonObj.setDatatime      (so2ValuesOnlyEntity.get("data_time"));
+            measureInfoRealJsonObj.setSidoname      (so2ValuesOnlyEntity.get("sido_name"));
+            measureInfoRealJsonObj.setStationname   (so2ValuesOnlyEntity.get("station_name"));
+            measureInfoRealJsonObj.setMangname      (so2ValuesOnlyEntity.get("mang_name"));
+            measureInfoRealJsonObj.setSo2value      (so2ValuesOnlyEntity.get("so2_value"));
             
             measureInfoRealJsonListObj.add(measureInfoRealJsonObj);
         }
