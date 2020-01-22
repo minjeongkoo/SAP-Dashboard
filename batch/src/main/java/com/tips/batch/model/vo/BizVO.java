@@ -1,14 +1,11 @@
-package com.tips.batch.model;
+package com.tips.batch.model.vo;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * The Class FxMarketPricesStore.
- *
- * @author ashraf
- */
+import com.tips.batch.model.FileWriteDTO;
+
 public class BizVO
 {
     private Map<String, FileWriteDTO> stockPrices = new HashMap<String, FileWriteDTO>();
