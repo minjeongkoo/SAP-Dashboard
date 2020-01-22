@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TableOneJsonList {
+public class MeasureInfoRealJsonList {
     @JsonProperty("list")
-    private ArrayList<TableOneJson> tableOneJsonList;	
+    private ArrayList<MeasureInfoRealJson> measureInfoRealJsonList;	
 }

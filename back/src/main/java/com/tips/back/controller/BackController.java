@@ -7,22 +7,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tips.back.common.RestResponseEntity;
-import com.tips.back.model.json.TableOneJsonList;
-import com.tips.back.service.TableOneEntityService;
+import com.tips.back.model.json.MeasureInfoRealJsonList;
+import com.tips.back.service.MeasureInfoRealEntityService;
 
 @RestController
 @RequestMapping("/")
 public class BackController
 {
     @Autowired
-    private TableOneEntityService tableOneEntityService;
+    private MeasureInfoRealEntityService measureInfoRealEntityService;
     
     @GetMapping("/list")
-    public RestResponseEntity<TableOneJsonList> findTableOneAll()
+    public RestResponseEntity<MeasureInfoRealJsonList> findMeasureInfoRealAll()
     {
-        RestResponseEntity<TableOneJsonList> result = null;
+        RestResponseEntity<MeasureInfoRealJsonList> result = null;
         
-        result = new RestResponseEntity<TableOneJsonList>(this.tableOneEntityService.findTableOneEntity());
+        result = new RestResponseEntity<MeasureInfoRealJsonList>(this.measureInfoRealEntityService.findMeasureInfoRealEntity());
         
         return result;
     }
@@ -38,11 +38,11 @@ public class BackController
      * 		# ...
      */   
     @GetMapping("/list/page")
-    public RestResponseEntity<TableOneJsonList> findTableOnePage(Pageable pageable)
+    public RestResponseEntity<MeasureInfoRealJsonList> findMeasureInfoRealPage(Pageable pageable)
     {
-    	RestResponseEntity<TableOneJsonList> result = null;
+    	RestResponseEntity<MeasureInfoRealJsonList> result = null;
     	
-    	result = new RestResponseEntity<TableOneJsonList>(this.tableOneEntityService.findTableOneEntity(pageable));
+    	result = new RestResponseEntity<MeasureInfoRealJsonList>(this.measureInfoRealEntityService.findMeasureInfoRealEntity(pageable));
     	
     	return result;
     }
