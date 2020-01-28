@@ -69,4 +69,26 @@ public class BackController
     	
     	return result;
     }
+    
+    /*
+     * URL : /list/khai?sido_name=<sido_name>&mang_name=<mang_name>
+     * Parameter
+     * - sindo_name
+     * 		# 서울
+     * 		# 경기
+     * 		# 인천
+     * - mang_name
+     * 		# 도시대기
+     * 		# 도로변대기
+     */
+    @GetMapping("/list/khai")
+    public RestResponseEntity<MeasureInfoRealJsonList> findKhaiValueInfoReal(
+    		@RequestParam("sido_name") String sidoName, @RequestParam("mang_name") String mangName)
+    {
+    	RestResponseEntity<MeasureInfoRealJsonList> result = null;
+    	
+    	result = new RestResponseEntity<MeasureInfoRealJsonList>(this.measureInfoRealEntityService.findKhaiValueInfoRealEntity(sidoName, mangName));
+    	
+    	return result;
+    }    
 }
