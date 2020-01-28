@@ -18,13 +18,12 @@ sap.ui.define([
         callbackFunction : function(oModel)
         {
             //console.log(JSON.stringify(oModel, null, 2));
-            
             var oData = oModel.getProperty("/result/list");
             //console.log("oData callbackFunction >>>> "+JSON.stringify(oData, null, 2));
-                        
             var oTable = this.byId("idTable");
             oTable.setModel(new JSONModel(oData));
-            oTable.setVisibleRowCount(oData.length);
+            //oTable.setVisibleRowCount(oData.length);
+            //oTable.setVisibleRowCount("10");
             this.oTableAfterRendering();
         },
         oTableAfterRendering : function(){
@@ -36,20 +35,43 @@ sap.ui.define([
             var formatPattern = ChartFormatter.DefaultPattern;
 
             var oVizFrame = this.oVizFrame = this.getView().byId("idVizFrame");
+            //oVizFrame.setBusy(true);
             oVizFrame.setVizProperties({
                 plotArea: {
                     dataLabel: {
                         formatString: formatPattern.SHORTFLOAT_MFD2,
                         visible: true
-                    }
+                    },
+                    window: {
+                        start: "firstDataPoint",
+                        end: "lastDataPoint"
+                    },
+                    colorPalette: [
+                        "#ff1744",
+                        "#FFAB00",
+                        "#d500f9",
+                        "#651fff",
+                        "#304FFE",
+                        "#1de9b6",
+                        "#6d4c41",
+                        "#78909c",
+                        "#c94f7c",
+                        "#FFEB7B",
+                        "#b64fc8",
+                        "#8c9eff",
+                        "#0091EA",
+                        "#00b686",
+                        "#d7ccc8",
+                        "#263238"
+                    ]    
                 },
                 valueAxis: {
-                    label: {
-                        formatString: formatPattern.SHORTFLOAT
-                    },
-                    title: {
-                        visible: false
-                    }
+	                    label: {
+	                        formatString: formatPattern.SHORTFLOAT
+	                    },
+	                title: {
+	                    visible: false
+	                }
                 },
                 categoryAxis: {
                     title: {
@@ -59,16 +81,29 @@ sap.ui.define([
                 title: {
                     visible: false,
                     text: 'Revenue by City and Store Name'
-                }
+                },
+                legend: {
+                    title: {
+                        visible: false
+                    },
+                    label: true,
+                    isScrollable: false
+                },
+                legendGroup: {
+                    layout: {
+                        linesOfWrap: 3,
+                        alignment: 'center',
+                        position: 'bottom'
+                    }
+                },
             });
-            console.log("chartModel11>>>> "+JSON.stringify(oChartModel, null, 2));
+            //console.log("chartModel11>>>> "+JSON.stringify(oChartModel, null, 2));
             var oChartData = oChartModel.getProperty("/result");
+            //console.log("chartModel22>>>> " +JSON.stringify(oChartData, null, 2));
             
-            console.log("chartModel22>>>> " +JSON.stringify(oChartData, null, 2));
             oVizFrame.setModel(new JSONModel(oChartData));
-            //var aaa = new JSONModel(oChartData)
-            //oVizFrame.setModel(new JSONModel(oChartData));
-
+            oVizFrame.setBusy(false);
+            
         /*    var oPopOver = this.getView().byId("idPopOver");
             oPopOver.connect(oVizFrame.getVizUid());
             oPopOver.setFormatString(formatPattern.STANDARDFLOAT);*/
