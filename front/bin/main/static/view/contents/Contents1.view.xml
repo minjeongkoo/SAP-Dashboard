@@ -23,19 +23,19 @@
 					<VBox>
 						<Text text="지역별 미세먼지" class="subTitle" />
 						<!-- <HBox class="chartArea" />-->
-						<viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}" height='500px' width="400px" vizType='column'>
+						<viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}" height='500px' width="500px" vizType='bar'>
                 			<viz:dataset>
                     			<viz.data:FlattenedDataset data="{/list}">
 	                        		<viz.data:dimensions>
 	                            		<viz.data:DimensionDefinition name="stationName" value="{station_name}" />
 	                        		</viz.data:dimensions>
 	                        		<viz.data:measures>
-	                            		<viz.data:MeasureDefinition name="이산화황농도" value="{so2_value}" />
+	                            		<viz.data:MeasureDefinition name="pm10value" value="{so2_value}" />
 	                        		</viz.data:measures>
                     			</viz.data:FlattenedDataset>
                 			</viz:dataset>
                 			<viz:feeds>
-                    			<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="이산화황농도" />
+                    			<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="pm10value" />
                     			<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="stationName" />
                 			</viz:feeds>
             			</viz:VizFrame>
@@ -88,7 +88,7 @@
 								id="idTable"
 								selectionMode="None"
 								rows="{/}"
-								visibleRowCount="15" 
+								visibleRowCount="auto" 
 								width="100%">
 							<t:columns>
 								<t:Column resizable="true" hAlign="Center" width="150px">
