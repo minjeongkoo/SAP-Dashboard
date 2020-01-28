@@ -19,7 +19,7 @@ sap.ui.define([
         {
             //console.log(JSON.stringify(oModel, null, 2));
             var oData = oModel.getProperty("/result/list");
-            //console.log("oData callbackFunction >>>> "+JSON.stringify(oData, null, 2));
+            console.log("oData callbackFunction >>>> "+JSON.stringify(oData, null, 2));
                         
             var oTable = this.byId("idTable");
             oTable.setModel(new JSONModel(oData));
@@ -60,20 +60,9 @@ sap.ui.define([
                     text: 'Revenue by City and Store Name'
                 }
             });
-            console.log("chartModel>>>> "+JSON.stringify(oChartModel, null, 2));
+            //console.log("chartModel>>>> "+JSON.stringify(oChartModel, null, 2));
             var oChartData = oChartModel.getProperty("/result");
             oVizFrame.setModel(new JSONModel(oChartData));
-            //var aaa = new JSONModel(oChartData)
-            //oVizFrame.setModel(new JSONModel(oChartData));
-
-        /*    var oPopOver = this.getView().byId("idPopOver");
-            oPopOver.connect(oVizFrame.getVizUid());
-            oPopOver.setFormatString(formatPattern.STANDARDFLOAT);*/
-            
-           /* var that = this;
-            dataModel.attachRequestCompleted(function() {
-                that.dataSort(this.getData());
-            });*/
         },
               
         errorCallbackFunction : function()
@@ -136,7 +125,6 @@ sap.ui.define([
         {
             var oParam = {
                 url     : "http://localhost:8081/list/so2?sido_name=서울&mang_name=도시대기",
-            	//url     : "http://localhost:8080/view/json/",
                 type    : "GET",
                 callback: "chartCallbackFunction",
                 error   : "errorCallbackFunction"
