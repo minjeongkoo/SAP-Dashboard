@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tips.back.model.KhaiValueInfoReal;
 import com.tips.back.model.MeasureInfoReal;
 import com.tips.back.model.SO2ValueInfoReal;
 import com.tips.back.model.json.MeasureInfoRealJson;
@@ -145,5 +146,32 @@ public class MeasureInfoRealEntityServiceImpl implements MeasureInfoRealEntitySe
         measureInfoRealJsonList.setMeasureInfoRealJsonList(measureInfoRealJsonListObj);
         
         return measureInfoRealJsonList;    	
+    }
+    
+    public MeasureInfoRealJsonList findKhaiValueInfoRealEntity(String sidoName, String mangName) throws InvalidParameterException{
+        MeasureInfoRealJsonList measureInfoRealJsonList = new MeasureInfoRealJsonList();
+        
+        // Retune value
+        ArrayList<MeasureInfoRealJson> measureInfoRealJsonListObj = new ArrayList<MeasureInfoRealJson>();
+        
+        List<KhaiValueInfoReal> khaiValueInfoRealByJPA = 
+        		this.measureInfoRealRepository.findKhaiValueInfoRealBySidonameAndMangname(sidoName, mangName);
+        // JPA return value
+        for(KhaiValueInfoReal khaiValueInfoRealEntity : khaiValueInfoRealByJPA)
+        {
+            MeasureInfoRealJson measureInfoRealJsonObj = new MeasureInfoRealJson();
+            
+            measureInfoRealJsonObj.setDatatime      (khaiValueInfoRealEntity.getDatatime   ());
+            measureInfoRealJsonObj.setSidoname      (khaiValueInfoRealEntity.getSidoname   ());
+            measureInfoRealJsonObj.setStationname   (khaiValueInfoRealEntity.getStationname());
+            measureInfoRealJsonObj.setMangname      (khaiValueInfoRealEntity.getMangname   ());
+            measureInfoRealJsonObj.setKhaivalue      (khaiValueInfoRealEntity.getKhaivalue  ());
+            
+            measureInfoRealJsonListObj.add(measureInfoRealJsonObj);
+        }
+          
+        measureInfoRealJsonList.setMeasureInfoRealJsonList(measureInfoRealJsonListObj);
+        
+        return measureInfoRealJsonList;
     }
 }
