@@ -149,3 +149,9 @@ input:focus 	{ outline: 		none !important; border: none !important; outline-offs
 /* RESPONSIVE MOBILE (~1000PX) END */
 
 
+/* map */
+div[id$=--contents2] div[id$=--map] > div:first-child > div:first-child > div:nth-child(6) > div {width:90px !important; text-align:center;}
+div[id$=--contents2] div[id$=--map] > div:first-child > div:first-child > div:nth-child(6) > div > div:nth-child(2) {width:100%;}
+/* map */
+
+
