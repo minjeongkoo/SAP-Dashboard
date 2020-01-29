@@ -18,9 +18,10 @@
                             <Image  src="/images/Ico_List.png"/>
                             <Text   text="Quick Start"	class="subTitle"/>
                         </l:HorizontalLayout>
-                        <Button     id="contents1"  text="Air Pollution"      press=".onNavToContent1" class="btnLeftList"/>
-                        <Button     id="contents2"  text="Case Studies 2"     press=".onNavToContent2" class="btnLeftList"/>
-                        <Button     id="contents3"  text="Case Studies 3"     press=".onNavToContent3" class="btnLeftList"/>
+                        <Button     id="contents1"  text="Air Pollution"      		press=".onNavToContent1" class="btnLeftList"/>
+                        <Button     id="contents2"  text="Case Studies 2"     		press=".onNavToContent2" class="btnLeftList"/>
+                        <Button     id="contents3"  text="Bar SampleChart"  	  	press=".onNavToContent3" class="btnLeftList"/>
+                        <Button     id="contents4"  text="Bullet SampleChart"     	press=".onNavToContent4" class="btnLeftList"/>
                     </VBox>
                 </l:VerticalLayout>
             </VBox>

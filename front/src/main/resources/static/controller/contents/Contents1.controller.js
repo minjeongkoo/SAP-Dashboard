@@ -18,16 +18,18 @@ sap.ui.define([
         callbackFunction : function(oModel)
         {
             //console.log(JSON.stringify(oModel, null, 2));
-            
             var oData = oModel.getProperty("/result/list");
+            
+            this.byId("pm10_grade").setText(oData[0].pm10_grade);//미세먼지(pm10등급)
+            this.byId("pm10_value").setText(oData[0].pm10_value);//미세먼지(pm10농도)
+ 
             //console.log("oData callbackFunction >>>> "+JSON.stringify(oData, null, 2));
-                        
             var oTable = this.byId("idTable");
             oTable.setModel(new JSONModel(oData));
-            oTable.setVisibleRowCount(oData.length);
-            this.oTableAfterRendering();
+            //oTable.setVisibleRowCount(oData.length);
+            this.callbackFunctionAfter();
         },
-        oTableAfterRendering : function(){
+        callbackFunctionAfter : function(){
         	this.charMeasureNameApi();
         },
         chartCallbackFunction : function(oChartModel){
@@ -39,9 +41,14 @@ sap.ui.define([
             oVizFrame.setVizProperties({
                 plotArea: {
                     dataLabel: {
-                        formatString: formatPattern.SHORTFLOAT_MFD2,
-                        visible: true
-                    }
+                        //formatString: formatPattern.SHORTFLOAT_MFD2,
+                    	formatString: formatPattern,
+                        visible: false
+                    },
+                    window: {
+                        start: "firstDataPoint",
+                        end: "lastDataPoint"
+                    },
                 },
                 valueAxis: {
                     label: {
@@ -58,25 +65,27 @@ sap.ui.define([
                 },
                 title: {
                     visible: false,
-                    text: 'Revenue by City and Store Name'
-                }
+                    text: '통합대기환경수치'
+                },
+                legend: {
+                    title: {
+                        visible: false
+                    },
+                    label: true,
+                    isScrollable: false
+                },
+                legendGroup: {
+                    layout: {
+                        linesOfWrap: 3,
+                        alignment: 'center',
+                        position: 'bottom'
+                    }
+                }                
             });
-            console.log("chartModel11>>>> "+JSON.stringify(oChartModel, null, 2));
+            //console.log("chartModel>>>> "+JSON.stringify(oChartModel, null, 2));
             var oChartData = oChartModel.getProperty("/result");
-            
-            console.log("chartModel22>>>> " +JSON.stringify(oChartData, null, 2));
+            //console.log("chartModel22>>>> "+JSON.stringify(oChartData, null, 2));
             oVizFrame.setModel(new JSONModel(oChartData));
-            //var aaa = new JSONModel(oChartData)
-            //oVizFrame.setModel(new JSONModel(oChartData));
-
-        /*    var oPopOver = this.getView().byId("idPopOver");
-            oPopOver.connect(oVizFrame.getVizUid());
-            oPopOver.setFormatString(formatPattern.STANDARDFLOAT);*/
-            
-           /* var that = this;
-            dataModel.attachRequestCompleted(function() {
-                that.dataSort(this.getData());
-            });*/
         },
               
         errorCallbackFunction : function()
@@ -138,7 +147,7 @@ sap.ui.define([
         charMeasureNameApi : function()
         {
             var oParam = {
-                url     : "http://localhost:8081/list/so2?sido_name=서울&mang_name=도시대기",
+                url     : "http://localhost:8081/list/khai?sido_name=서울&mang_name=도시대기",
                 type    : "GET",
                 callback: "chartCallbackFunction",
                 error   : "errorCallbackFunction"

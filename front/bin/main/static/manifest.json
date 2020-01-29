@@ -40,7 +40,8 @@
 			},
 			"routes": [{ "name": "contents1", "pattern": ""         , "target": "contents1" },
 			           { "name": "contents2", "pattern": "contents2", "target": "contents2" },
-			           { "name": "contents3", "pattern": "contents3", "target": "contents3" }],
+			           { "name": "contents3", "pattern": "contents3", "target": "contents3" },
+			           { "name": "contents4", "pattern": "contents4", "target": "contents4" }],
 			"targets": {
 				"contents1": {
 					"viewPath": "OpenUI5.view.contents",
@@ -59,6 +60,12 @@
                     "viewName": "Contents3",
                     "viewLevel": 1,
                     "viewId": "contents3"
+                },
+                "contents4": {
+                    "viewPath": "OpenUI5.view.contents",
+                    "viewName": "Contents4",
+                    "viewLevel": 1,
+                    "viewId": "contents4"
                 }
 			}
 		}
