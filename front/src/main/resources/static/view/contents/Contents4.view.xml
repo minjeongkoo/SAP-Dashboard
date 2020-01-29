@@ -12,47 +12,37 @@
 	<layout:HorizontalLayout class="sapViewInner">
 		<VBox>
 			<!--Below is the setting panel -->
-			<Panel id='settingsPanel' class="panelStyle" expandable="true"
-				expanded="true" headerText="Settings" width="auto">
+			<Panel id='settingsPanel' class="panelStyle" expandable="true" expanded="true" headerText="Settings" width="auto">
 				<content>
 					<HBox class='settingsHBox'>
 						<VBox class='settingsBox'>
-							<Label text="{/dataset/name}" design="Bold"
-								class='settingsLabel'></Label>
+							<Label text="{/dataset/name}" design="Bold" class='settingsLabel'></Label>
 							<RadioButtonGroup id='datasetRadioGroup'
 								buttons="{path: '/dataset/values'}">
 								<buttons>
-									<RadioButton class='settingsRadio' text="{name}"
-										select="onDatasetSelected" />
+									<RadioButton class='settingsRadio' text="{name}" select="onDatasetSelected" />
 								</buttons>
 							</RadioButtonGroup>
 						</VBox>
 						<VBox class='settingsBox'>
-							<Label text='{/series/name}' design="Bold"
-								class='settingsLabel'></Label>
-							<RadioButtonGroup id='seriesRadioGroup'
-								buttons="{path: '/series/values'}">
+							<Label text='{/series/name}' design="Bold" class='settingsLabel'></Label>
+							<RadioButtonGroup id='seriesRadioGroup' buttons="{path: '/series/values'}">
 								<buttons>
-									<RadioButton class='settingsRadio' text="{name}"
-										select='onSeriesSelected' />
+									<RadioButton class='settingsRadio' text="{name}" select='onSeriesSelected' />
 								</buttons>
 							</RadioButtonGroup>
 						</VBox>
 						<VBox class='settingsBox'>
-							<Label text='{/dataLabel/name}' design="Bold"
-								class='settingsLabel'></Label>
-							<Switch id='valueLabelSwitch' class='settingsSwitch'
-								state="{/dataLabel/defaultState}">
+							<Label text='{/dataLabel/name}' design="Bold" class='settingsLabel'></Label>
+							<Switch id='valueLabelSwitch' class='settingsSwitch' state="{/dataLabel/defaultState}">
 								<layoutData>
 									<FlexItemData growFactor="1" />
 								</layoutData>
 							</Switch>
 						</VBox>
 						<VBox class='settingsBox'>
-							<Label text='{/axisTitle/name}' design="Bold"
-								class='settingsLabel'></Label>
-							<Switch class='settingsSwitch'
-								state="{/axisTitle/defaultState}" change='onAxisTitleChanged'>
+							<Label text='{/axisTitle/name}' design="Bold" class='settingsLabel'></Label>
+							<Switch class='settingsSwitch' state="{/axisTitle/defaultState}" change='onAxisTitleChanged'>
 								<layoutData>
 									<FlexItemData growFactor="1" />
 								</layoutData>
@@ -61,25 +51,28 @@
 						<VBox class='settingsBox'>
 							<Label text='{/valuesDisplayed/name}' design="Bold"
 								class='settingsLabel'></Label>
-							<Select id='valuesSelect' class='settingsSelect'
-								selectedKey='{/valuesDisplayed/defaultSelected}'
-								autoAdjustWidth='true' maxWidth="150px"
-								change='onValuesDisplayedChanged'
-								items="{path: '/valuesDisplayed/values'}">
-								<items>
-									<core:Item text="{name}" key="{key}" />
-								</items>
+							<Select 
+									id='valuesSelect' 
+									class='settingsSelect'
+									selectedKey='{/valuesDisplayed/defaultSelected}'
+									autoAdjustWidth='true' maxWidth="150px"
+									change='onValuesDisplayedChanged'
+									items="{path: '/valuesDisplayed/values'}">
+									<items>
+										<core:Item text="{name}" key="{key}" />
+									</items>
 							</Select>
 						</VBox>
 					</HBox>
 				</content>
 			</Panel>
-			<viz:Popover id="idPopOver"></viz:Popover>
-			<viz:VizFrame id="idVizFrame"
-				uiConfig="{applicationSet:'fiori'}"
-				height="500px"
-				width="1000px"
-				vizType='vertical_bullet'>
+			<viz:Popover 	id="idPopOver"></viz:Popover>
+			<viz:VizFrame 
+							id="idVizFrame"
+							uiConfig="{applicationSet:'fiori'}"
+							height="500px"
+							width="1000px"
+							vizType='vertical_bullet'>
 				<viz:dataset>
 					<viz.data:FlattenedDataset data="{/milk}">
 						<viz.data:dimensions>
@@ -103,7 +96,5 @@
 				</viz:feeds>
 			</viz:VizFrame>
 		</VBox>
-
 	</layout:HorizontalLayout>
-
 </mvc:View>
