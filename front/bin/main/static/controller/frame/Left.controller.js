@@ -8,7 +8,6 @@ sap.ui.define([
 			console.log("Left.js OnInit()");
 		},
 
-		
 		onNavToContent1 : function() {
 			console.log("Left.js onNavToContent1 Clicked");
 			

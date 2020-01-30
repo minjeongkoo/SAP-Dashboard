@@ -69,7 +69,7 @@ sap.ui.define([
 		},
 		localApi : function() {
             var oParam = {
-                url     : "http://localhost:8081/list/all?sido_name=서울&mang_name=도시대기",
+                url     : "http://localhost:9001/list/all?sido_name=서울&mang_name=도시대기",
                 type    : "GET",
                 data    : "",
                 callback: "callbackFunction",
