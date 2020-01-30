@@ -32,7 +32,7 @@
 								</buttons>
 							</RadioButtonGroup>
 						</VBox>
-						<VBox class='settingsBox'>
+						<VBox class='customSettingsBox'>
 							<Label text='{/dataLabel/name}' design="Bold" class='settingsLabel'></Label>
 							<Switch id='valueLabelSwitch' class='settingsSwitch' state="{/dataLabel/defaultState}">
 								<layoutData>

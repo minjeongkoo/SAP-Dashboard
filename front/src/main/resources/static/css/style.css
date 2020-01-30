@@ -36,6 +36,7 @@ button:hover 	{ transform: 	translateY(2px); 														}
 input:focus 	{ outline: 		none !important; border: none !important; outline-offset: 0!important; 	}
 :focus 			{ outline: 		none !important; font-weight: 700; 										}
 ::before		{ outline: 		none !important;					 									}
+.customSettingsBox 	{margin-left: 1rem;}
 			
 /* BASE STYLES SETTING END																	*/
 

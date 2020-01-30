@@ -20,7 +20,7 @@
 	                            <buttons><RadioButton 	class='settingsRadio' 	text="{name}" 			select="onDatasetSelected"/></buttons>
 	                        </RadioButtonGroup>
 	                    </VBox>
-	                    <VBox 						class='settingsBox'>
+	                    <VBox 						class='customSettingsBox'>
 	                        <Label 					class='settingsLabel' 		text='{/series/name}' 	design="Bold"/>
 	                        <RadioButtonGroup 		id='seriesRadioGroup'		buttons="{path: '/series/values'}" >
 	                            <buttons>
@@ -28,7 +28,7 @@
 	                            </buttons>
 	                        </RadioButtonGroup>
 	                    </VBox>
-	                    <VBox 						class='settingsBox'>
+	                    <VBox 						class='customSettingsBox'>
 	                        <Label 					class='settingsLabel'		text = '{/dataLabel/name}' design="Bold" ></Label>
 	                        <Switch class='settingsSwitch' state="{/dataLabel/defaultState}" change='onDataLabelChanged'>
 	                            <layoutData>
