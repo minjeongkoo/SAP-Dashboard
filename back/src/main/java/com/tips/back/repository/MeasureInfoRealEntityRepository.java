@@ -19,27 +19,65 @@ public interface MeasureInfoRealEntityRepository extends JpaRepository<MeasureIn
 	
 	List<MeasureInfoReal> findBySidonameAndMangname(String sidoName, String mangName);
 	
-	@Query(name="measureInfoRealEntity.findSO2ValueInfoReal", nativeQuery=true)
+	@Query(value="SELECT m.data_time as datatime, m.sido_name as sidoname, m.station_name as stationname, m.mang_name as mangname, m.so2_value as so2value " + 
+				 "FROM(SELECT data_time, sido_name, station_name, mang_name, so2_value, row_number() over (partition by sido_name, station_name, mang_name order by data_time desc) rn " + 
+				 "	   FROM public.measure_info_real) m " + 
+				 "WHERE m.rn = 1;",
+		   nativeQuery=true)
 	List<SO2ValueInfoReal> findSO2ValueInfoReal();
 	
-	@Query(name="measureInfoRealEntity.findSO2ValueInfoRealBySidoname", nativeQuery=true)
+	@Query(value="SELECT m.data_time as datatime, m.sido_name as sidoname, m.station_name as stationname, m.mang_name as mangname, m.so2_value as so2value " + 
+				 "FROM(SELECT data_time, sido_name, station_name, mang_name, so2_value, row_number() over (partition by sido_name, station_name, mang_name order by data_time desc) rn " + 
+				 "	   FROM public.measure_info_real " + 
+				 "	   WHERE sido_name = ?1) m " + 
+				 "WHERE m.rn = 1;", 
+		   nativeQuery=true)
 	List<SO2ValueInfoReal> findSO2ValueInfoRealBySidoname(String sidoName);
 	
-	@Query(name="measureInfoRealEntity.findSO2ValueInfoRealByMangname", nativeQuery=true)
+	@Query(value="SELECT m.data_time as datatime, m.sido_name as sidoname, m.station_name as stationname, m.mang_name as mangname, m.so2_value as so2value " + 
+			 	 "FROM(SELECT data_time, sido_name, station_name, mang_name, so2_value, row_number() over (partition by sido_name, station_name, mang_name order by data_time desc) rn " + 
+			 	 "	   FROM public.measure_info_real " + 
+			 	 "	   WHERE mang_name = ?1) m " + 
+			 	 "WHERE m.rn = 1;", 
+	       nativeQuery=true)
 	List<SO2ValueInfoReal> findSO2ValueInfoRealByMangname(String mangName);
 	
-	@Query(name="measureInfoRealEntity.findSO2ValueInfoRealBySidonameAndMangname", nativeQuery=true)
+	@Query(value="SELECT m.data_time as datatime, m.sido_name as sidoname, m.station_name as stationname, m.mang_name as mangname, m.so2_value as so2value " + 
+		 	 	 "FROM(SELECT data_time, sido_name, station_name, mang_name, so2_value, row_number() over (partition by sido_name, station_name, mang_name order by data_time desc) rn " + 
+		 	 	 "	   FROM public.measure_info_real " + 
+		 	 	 "	   WHERE sido_name = ?1 and mang_name = ?2) m " + 
+		 	 	 "WHERE m.rn = 1;", 
+           nativeQuery=true)
 	List<SO2ValueInfoReal> findSO2ValueInfoRealBySidonameAndMangname(String sidoName, String mangName);
 
-	@Query(name="measureInfoRealEntity.findKhaiValueInfoReal", nativeQuery=true)
+	@Query(value="SELECT m.data_time as datatime, m.sido_name as sidoname, m.station_name as stationname, m.mang_name as mangname, m.khai_value as khaivalue " + 
+			 	 "FROM(SELECT data_time, sido_name, station_name, mang_name, khai_value, row_number() over (partition by sido_name, station_name, mang_name order by data_time desc) rn " + 
+			 	 "	   FROM public.measure_info_real) m " + 
+			 	 "WHERE m.rn = 1;",
+		   nativeQuery=true)	
 	List<KhaiValueInfoReal> findKhaiValueInfoReal();
 	
-	@Query(name="measureInfoRealEntity.findKhaiValueInfoRealBySidoname", nativeQuery=true)
+	@Query(value="SELECT m.data_time as datatime, m.sido_name as sidoname, m.station_name as stationname, m.mang_name as mangname, m.khai_value as khaivalue " + 
+			 	 "FROM(SELECT data_time, sido_name, station_name, mang_name, khai_value, row_number() over (partition by sido_name, station_name, mang_name order by data_time desc) rn " + 
+			 	 "	   FROM public.measure_info_real " + 
+			 	 "	   WHERE sido_name = ?1) m " + 
+			 	 "WHERE m.rn = 1;", 
+	       nativeQuery=true)
 	List<KhaiValueInfoReal> findKhaiValueInfoRealBySidoname(String sidoName);
 	
-	@Query(name="measureInfoRealEntity.findKhaiValueInfoRealByMangname", nativeQuery=true)
+	@Query(value="SELECT m.data_time as datatime, m.sido_name as sidoname, m.station_name as stationname, m.mang_name as mangname, m.khai_value as khaivalue " + 
+		 	 	 "FROM(SELECT data_time, sido_name, station_name, mang_name, khai_value, row_number() over (partition by sido_name, station_name, mang_name order by data_time desc) rn " + 
+		 	 	 "	   FROM public.measure_info_real " + 
+		 	 	 "	   WHERE mang_name = ?1) m " + 
+		 	 	 "WHERE m.rn = 1;", 
+           nativeQuery=true)
 	List<KhaiValueInfoReal> findKhaiValueInfoRealByMangname(String mangName);
 	
-	@Query(name="measureInfoRealEntity.findKhaiValueInfoRealBySidonameAndMangname", nativeQuery=true)
+	@Query(value="SELECT m.data_time as datatime, m.sido_name as sidoname, m.station_name as stationname, m.mang_name as mangname, m.khai_value as khaivalue " + 
+	 	 	 	 "FROM(SELECT data_time, sido_name, station_name, mang_name, khai_value, row_number() over (partition by sido_name, station_name, mang_name order by data_time desc) rn " + 
+	 	 	 	 "	   FROM public.measure_info_real " + 
+	 	 	 	 "	   WHERE sido_name = ?1 and mang_name = ?2) m " + 
+	 	 	 	 "WHERE m.rn = 1;", 
+           nativeQuery=true)
 	List<KhaiValueInfoReal> findKhaiValueInfoRealBySidonameAndMangname(String sidoName, String mangName);
 }
