@@ -71,7 +71,7 @@ sap.ui.define([
 							that.station_info[i].open(that.map);
 						}
 						for (var i = 0; i < that.sido_info.length; i++) {
-							that.sido_info[i].open(that.map);
+							that.sido_info[i].close();
 						}
 					}
 				});
@@ -123,20 +123,22 @@ sap.ui.define([
             	for (var j = 0; j < this.station_latlng.length; j++) {
 					if(oData[i].station_name == this.station_latlng[j].station_name){
 						oData[i].position = this.station_latlng[j].position;
-						this.openInfoWindow(oData[i], "station");
+						this.openInfoWindow(oData[i], "station", true);
 						break;
 					}
 				}// for j
 			}// for i
             this.setModel(new sap.ui.model.json.JSONModel(oData), "station");
         },
-        openInfoWindow : function(oData, type) {
+        openInfoWindow : function(oData, type, open) {
         	var infowindow = new kakao.maps.InfoWindow({
 			    position : oData.position, 
 			    content : '<div class="mapInfoWindow" style="padding:5px;">'+oData.station_name+'<br><div style="color:#006BEE;">'+oData.khai_value+'</div></div>'
 			});
-			  
-			infowindow.open(this.map);
+			
+        	if(open){
+        		infowindow.open(this.map);
+        	}
 			
 			if(type == "station"){
 				this.station_info.push(infowindow);
