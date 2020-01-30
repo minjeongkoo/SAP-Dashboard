@@ -4,9 +4,12 @@ sap.ui.define([
 	"use strict";
 		
 	return BaseController.extend("OpenUI5.controller.common.BaseController", {
-		sido_info: [],
-		station_info: [],
-		sido_latlng: [{sido_name: "서울", station_name: "서울", mang_name: "도시대기", position: new kakao.maps.LatLng(37.56722060794568, 126.97847103982909)}],
+		sido_latlng: [
+			{sido_name: "서울", station_name: "서울", khai_value: "-", position: new kakao.maps.LatLng(37.566941311612176, 126.97853903465828)},
+			{sido_name: "경기", station_name: "경기", khai_value: "-", position: new kakao.maps.LatLng(37.275481615850005, 127.00829861293734)},
+			{sido_name: "인천", station_name: "인천", khai_value: "-", position: new kakao.maps.LatLng(37.45733608399472, 126.70450687941661)},
+			{sido_name: "광명", station_name: "광명", khai_value: "-", position: new kakao.maps.LatLng(37.47982852446687, 126.86432897505385)},
+		],
 		station_latlng: [
 			{sido_name: "서울", station_name: "강남구", mang_name: "도시대기", position: new kakao.maps.LatLng(37.500945292576965, 127.04523641759724)},
 			{sido_name: "서울", station_name: "은평구", mang_name: "도시대기", position: new kakao.maps.LatLng(37.61049118551127, 126.92461633598255)},
@@ -57,9 +60,19 @@ sap.ui.define([
 				// 지도 확대 레벨 변화 이벤트를 등록한다
 				kakao.maps.event.addListener(map, 'zoom_changed', function () {
 					if(map.getLevel() > 8){
-						
+						for (var i = 0; i < that.station_info.length; i++) {
+							that.station_info[i].close();
+						}
+						for (var i = 0; i < that.sido_info.length; i++) {
+							that.sido_info[i].open(that.map);
+						}
 					}else{
-						
+						for (var i = 0; i < that.station_info.length; i++) {
+							that.station_info[i].open(that.map);
+						}
+						for (var i = 0; i < that.sido_info.length; i++) {
+							that.sido_info[i].open(that.map);
+						}
 					}
 				});
 				
@@ -74,7 +87,7 @@ sap.ui.define([
 		},
 		sidoApi : function() {
             var oParam = {
-                url     : "http://localhost:9001/list/all?sido_name=서울",
+                url     : "http://localhost:9001/list/all?sido_name=서울&mang_name=도시대기",
                 type    : "GET",
                 data    : "",
                 callback: "sidoCallbackFunction",
@@ -87,13 +100,10 @@ sap.ui.define([
             var oData = oModel.getProperty("/result/list");
             this.setModel(new sap.ui.model.json.JSONModel(oData), "sido");
             
-            var infowindow = new kakao.maps.InfoWindow({
-			    position : oData.position, 
-			    content : '<div class="mapInfoWindow" style="padding:5px;">'+oData.station_name+'<br><div style="color:skyblue;">'+oData.khai_value+'</div></div>'
-			});
-			  
-//			infowindow.open(this.map);
-			this.sido_info.push(infowindow);
+            this.sido_info = [];
+            for (var i = 0; i < this.sido_latlng.length; i++) {
+            	this.openInfoWindow(this.sido_latlng[i], "sido");
+			}
         },
 		stationApi : function() {
             var oParam = {
@@ -107,26 +117,32 @@ sap.ui.define([
             this.callAjax(oParam);
         },
         stationCallbackFunction : function(oModel) {
+        	this.station_info = [];
             var oData = oModel.getProperty("/result/list");
             for (var i = 0; i < oData.length; i++) {
             	for (var j = 0; j < this.station_latlng.length; j++) {
 					if(oData[i].station_name == this.station_latlng[j].station_name){
 						oData[i].position = this.station_latlng[j].position;
-						this.openInfoWindow(oData[i]);
+						this.openInfoWindow(oData[i], "station");
 						break;
 					}
 				}// for j
 			}// for i
             this.setModel(new sap.ui.model.json.JSONModel(oData), "station");
         },
-        openInfoWindow : function(oData) {
+        openInfoWindow : function(oData, type) {
         	var infowindow = new kakao.maps.InfoWindow({
 			    position : oData.position, 
-			    content : '<div class="mapInfoWindow" style="padding:5px;">'+oData.station_name+'<br><div style="color:skyblue;">'+oData.khai_value+'</div></div>'
+			    content : '<div class="mapInfoWindow" style="padding:5px;">'+oData.station_name+'<br><div style="color:#006BEE;">'+oData.khai_value+'</div></div>'
 			});
 			  
 			infowindow.open(this.map);
-			this.station_info.push(infowindow);
+			
+			if(type == "station"){
+				this.station_info.push(infowindow);
+			}else{
+				this.sido_info.push(infowindow);
+			}
         }
 	});
 }, true);
