@@ -13,7 +13,8 @@ sap.ui.define([
         onInit : function ()
         {
         	window.contents1 = this;
-            this.localApi();
+            
+        	this.localApi();
         },
         /*
          *  table list 데이터 가져오는 callback() 함수
@@ -105,7 +106,7 @@ sap.ui.define([
         localApi : function()
         {
             var oParam = {
-                url     : "http://localhost:9001/list",
+                url     : "http://192.168.1.138:9001/list",
                 type    : "GET",
                 data    : "",
                 callback: "callbackFunction",
@@ -115,48 +116,48 @@ sap.ui.define([
             this.callAjax(oParam);
         },
         
-        callPublicApi : function()
-        {
-            var oParam = {
-                    url     : "http://localhost:8088/",
-                    type    : "GET"
-                };
-          
-            var serviceId   = "";
-            var operationNm = "";
-          
-                serviceId   = "ArpltnInforInqireSvc"    ;  // 대기오염정보 조회 서비스
-                operationNm = "getCtprvnRltmMesureDnsty";  // 시도별 실시간 측정정보 조회
-
-              //serviceId   = "MsrstnInfoInqireSvc"     ;  // 측정소정보 조회 서비스
-              //operationNm = "getNearbyMsrstnList"     ;  // 근접측정소 목록 조회
-              //operationNm = "getMsrstnList"           ;  // 측정소 목록 조회
-              
-            var serviceKey  = "bg9choiwFZX5JYcIIF76jFiVYe0VwiWdxdpCUldbALWxzJLNZA4Ipq2Z1SVqkZyWSW88og%2Bt8EiOCX9J%2BB3ZUw%3D%3D";
-            var numOfRows   = "100" ;
-            var pageNo      = "1"   ;
-            var sidoName    = "서울" ;
-            var version     = "1.3" ;
-            var returnType  = "json";
-          
-            oParam.url += "http://openapi.airkorea.or.kr/openapi/services/rest/"
-                       + serviceId
-                       + "/"
-                       + operationNm
-                       + "?" + "serviceKey="   + serviceKey
-                       + "&" + "numOfRows="    + numOfRows
-                       + "&" + "pageNo="       + pageNo
-                       + "&" + "sidoName="     + sidoName
-                       + "&" + "ver="          + version
-                       + "&" +  "_returnType=" + returnType;
-          
-            this.callAjax2(oParam);
-        },
+//        callPublicApi : function()
+//        {
+//            var oParam = {
+//                    url     : "http://192.168.1.138:8088/",
+//                    type    : "GET"
+//                };
+//          
+//            var serviceId   = "";
+//            var operationNm = "";
+//          
+//                serviceId   = "ArpltnInforInqireSvc"    ;  // 대기오염정보 조회 서비스
+//                operationNm = "getCtprvnRltmMesureDnsty";  // 시도별 실시간 측정정보 조회
+//
+//              //serviceId   = "MsrstnInfoInqireSvc"     ;  // 측정소정보 조회 서비스
+//              //operationNm = "getNearbyMsrstnList"     ;  // 근접측정소 목록 조회
+//              //operationNm = "getMsrstnList"           ;  // 측정소 목록 조회
+//              
+//            var serviceKey  = "bg9choiwFZX5JYcIIF76jFiVYe0VwiWdxdpCUldbALWxzJLNZA4Ipq2Z1SVqkZyWSW88og%2Bt8EiOCX9J%2BB3ZUw%3D%3D";
+//            var numOfRows   = "100" ;
+//            var pageNo      = "1"   ;
+//            var sidoName    = "서울" ;
+//            var version     = "1.3" ;
+//            var returnType  = "json";
+//          
+//            oParam.url += "http://openapi.airkorea.or.kr/openapi/services/rest/"
+//                       + serviceId
+//                       + "/"
+//                       + operationNm
+//                       + "?" + "serviceKey="   + serviceKey
+//                       + "&" + "numOfRows="    + numOfRows
+//                       + "&" + "pageNo="       + pageNo
+//                       + "&" + "sidoName="     + sidoName
+//                       + "&" + "ver="          + version
+//                       + "&" +  "_returnType=" + returnType;
+//          
+//            this.callAjax2(oParam);
+//        },
         //측정소별 Chart데이터 호출한다.
         charMeasureNameApi : function()
         {
             var oParam = {
-                url     : "http://localhost:9001/list/khai?sido_name=서울&mang_name=도시대기",
+                url     : "http://192.168.1.138:9001/list/khai?sido_name=서울&mang_name=도시대기",
                 type    : "GET",
                 callback: "chartCallbackFunction",
                 error   : "errorCallbackFunction"

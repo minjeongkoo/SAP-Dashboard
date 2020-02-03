@@ -40,6 +40,7 @@ sap.ui.define([
                 contentType : "application/json",
                 url         : oParam.url,
                 dataType    : "json",
+                async       : true,
                 success     : 
                     function(oData, textStatus, jqXHR)
                     {
@@ -56,55 +57,55 @@ sap.ui.define([
                         proxyFunc();
                     }
             });
-        },
-        
-        callAjax2 : function (oParam)
-        {
-            console.log("callAjax2()");
-            
-            $.ajax({
-            	"url"      : oParam.url,
-            	"type"     : oParam.type,
-                "success"  :
-                    function (result)
-                    {
-                        if (result == null || result == "")
-                        {
-                            console.log("해당 주소로 얻을수 있는 좌표가 없습니다. 주소값을 다시 입력하세요");
-                        }
-                        else
-                        {
-                            $.each(result, function(i, value)
-                            {
-                                var oModel = new JSONModel();
-                                oModel.setData(value); 
-
-                                console.log("Response : " + i);
-                              //console.log(JSON.stringify(oModel, null, 2));
-                                console.log(JSON.stringify(value , null, 2));
-                      
-                                if (result.data == null) 
-                                {
-                                    if (i == 0) 
-                                    {
-                                        $("#x_coords").attr("value", value.posX   ); 
-                                        $("#y_coords").attr("value", value.posY   ); 
-                                        $("#address" ).attr("value", value.address);
-                                    }
-                                }
-                            });
-                        }
-                        
-                        console.log("End of Callback");
-                    },
-                "async"    : "false",
-                "dataType" : "json",
-                "error"    :
-                    function(x, o, e) 
-                    {
-                        console.log(x.status + " : " + o + " : " + e);    
-                    }
-            });
         }
+//        ,
+//        callAjax2 : function (oParam)
+//        {
+//            console.log("callAjax2()");
+//            
+//            $.ajax({
+//            	"url"      : oParam.url,
+//            	"type"     : oParam.type,
+//                "success"  :
+//                    function (result)
+//                    {
+//                        if (result == null || result == "")
+//                        {
+//                            console.log("해당 주소로 얻을수 있는 좌표가 없습니다. 주소값을 다시 입력하세요");
+//                        }
+//                        else
+//                        {
+//                            $.each(result, function(i, value)
+//                            {
+//                                var oModel = new JSONModel();
+//                                oModel.setData(value); 
+//
+//                                console.log("Response : " + i);
+//                              //console.log(JSON.stringify(oModel, null, 2));
+//                                console.log(JSON.stringify(value , null, 2));
+//                      
+//                                if (result.data == null) 
+//                                {
+//                                    if (i == 0) 
+//                                    {
+//                                        $("#x_coords").attr("value", value.posX   ); 
+//                                        $("#y_coords").attr("value", value.posY   ); 
+//                                        $("#address" ).attr("value", value.address);
+//                                    }
+//                                }
+//                            });
+//                        }
+//                        
+//                        console.log("End of Callback");
+//                    },
+//                "dataType" : "json",
+//                "async"    : true,
+//                "error"    :
+//                    function(x, o, e) 
+//                    {
+//                        console.log(x.status + " : " + o + " : " + e);    
+//                    }
+//            });
+//        }
     });
 });

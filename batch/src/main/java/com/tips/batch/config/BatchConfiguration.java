@@ -18,20 +18,20 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 
-import com.tips.batch.bean.DummyClass;
-import com.tips.batch.bean.listener.ListenerDBExt;
-import com.tips.batch.bean.listener.ListenerFlatFileExt;
-import com.tips.batch.bean.processor.ProcessorImpl;
-import com.tips.batch.bean.reader.ReaderDummyImpl;
-import com.tips.batch.bean.reader.ReaderFlatFileExt;
-import com.tips.batch.bean.reader.ReaderRestApiImpl;
-import com.tips.batch.bean.writer.WriterDBImpl;
-import com.tips.batch.bean.writer.WriterDTOImpl;
 import com.tips.batch.model.ProcessorReceiveDTO;
 import com.tips.batch.model.ReaderReturnDTO;
 import com.tips.batch.model.entity.MeasureInfoRealStage;
 import com.tips.batch.model.vo.BizVO;
 import com.tips.batch.model.vo.MeasureInfoVO;
+import com.tips.batch.step.DummyClass;
+import com.tips.batch.step.listener.ListenerDBExt;
+import com.tips.batch.step.listener.ListenerFlatFileExt;
+import com.tips.batch.step.processor.ProcessorImpl;
+import com.tips.batch.step.reader.ReaderDummyImpl;
+import com.tips.batch.step.reader.ReaderFlatFileExt;
+import com.tips.batch.step.reader.ReaderRestApiImpl;
+import com.tips.batch.step.writer.WriterDBImpl;
+import com.tips.batch.step.writer.WriterDTOImpl;
 
 @Configuration
 @EnableBatchProcessing
