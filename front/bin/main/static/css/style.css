@@ -36,6 +36,7 @@ button:hover 	{ transform: 	translateY(2px); 														}
 input:focus 	{ outline: 		none !important; border: none !important; outline-offset: 0!important; 	}
 :focus 			{ outline: 		none !important; font-weight: 700; 										}
 ::before		{ outline: 		none !important;					 									}
+.customSettingsBox 	{margin-left: 1rem;}
 			
 /* BASE STYLES SETTING END																	*/
 
@@ -147,5 +148,11 @@ input:focus 	{ outline: 		none !important; border: none !important; outline-offs
 }
 
 /* RESPONSIVE MOBILE (~1000PX) END */
+
+
+/* map */
+div[id$=--contents2] div[id$=--map] > div:first-child > div:first-child > div:nth-child(6) > div {width:90px !important; text-align:center;}
+div[id$=--contents2] div[id$=--map] > div:first-child > div:first-child > div:nth-child(6) > div > div:nth-child(2) {width:100%;}
+/* map */
 
 
