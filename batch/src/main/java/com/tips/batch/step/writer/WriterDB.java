@@ -39,8 +39,11 @@ public class WriterDB implements ItemWriter<List<ProcessorReceiveDTO>>
     
     private JdbcBatchItemWriter<MeasureInfoRealStage> batchTargetWriter;
     
-    SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
+    //SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
 
+    @Autowired
+    DataSource dataSource;
+    
     private static final String sql = "insert into public.measure_info_real_stage "
                                     + "(                                          "
                                     + "    " + ColumnMap.column[ 0] + ",          "   
@@ -84,13 +87,13 @@ public class WriterDB implements ItemWriter<List<ProcessorReceiveDTO>>
                                     + "  , :columnD1 , :columnD2 , :columnD3 , :columnD4 , :columnD5                                                 "
                                     + ")                                                                                                             ";
     
-    public WriterDB()
-    {
-        dataSource.setDriver  (new org.postgresql.Driver());
-        dataSource.setUrl     ("jdbc:postgresql://localhost:5432/tipsdb");
-        dataSource.setUsername("tipsuser");
-        dataSource.setPassword("tipsuser");
-    }
+//    public WriterDB()
+//    {
+//        dataSource.setDriver  (new org.postgresql.Driver());
+//        dataSource.setUrl     ("jdbc:postgresql://localhost:5432/tipsdb");
+//        dataSource.setUsername("tipsuser");
+//        dataSource.setPassword("tipsuser");
+//    }
 
     @BeforeStep
     public void prepareForWriter()

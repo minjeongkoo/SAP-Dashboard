@@ -12,6 +12,10 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tips.batch.mapper.ColumnMap;
 import com.tips.batch.model.ReaderReturnDTO;
+import com.tips.batch.model.entity.MeasureInfoRealStage;
+
+import lombok.Data;
+
 import com.fasterxml.jackson.databind.JsonNode;
 
 import org.springframework.batch.core.configuration.annotation.JobScope;
@@ -31,6 +35,11 @@ public class ReaderRestApi implements ItemReader<List<ReaderReturnDTO>>
     @Value("#{jobParameters['StartTime']}")
     public String startTime;
     
+    public static void initRunningCount()
+    {
+    	runningCount = 0;
+    }
+    
     @Override
     public List<ReaderReturnDTO> read()
     {
@@ -40,15 +49,33 @@ public class ReaderRestApi implements ItemReader<List<ReaderReturnDTO>>
         
         // Must send null to end the batch
         List<ReaderReturnDTO> readerReturnDTOList = null;
-        
+
+        log.info("[ReaderRestApi] read() runningCount : {}, runningKey.length : {}}", runningCount, runningKey.length);
+
         if (runningCount < runningKey.length && 1 == 1)
         {
-            log.info("[ReaderRestApi] read() runningCount : {}, runningKey.length : {}, runningKey : {}", runningCount, runningKey.length, runningKey[runningCount]);
-            
-            readerReturnDTOList = this.getResource(runningKey[runningCount]);
-            
+        	log.info("[ReaderRestApi] read() runningKey : {}", runningKey[runningCount]);
+
+          //readerReturnDTOList = this.getResource(runningKey[runningCount]);
+        	readerReturnDTOList = this.getResourceMock();
+
             runningCount++;
         }
+        
+        log.info("[ReaderRestApi] read() readerReturnDTOList.size() : {}", readerReturnDTOList.size());
+        
+        return readerReturnDTOList;
+    }
+    
+    // Mock Data
+    public List<ReaderReturnDTO> getResourceMock()
+    {
+        List<ReaderReturnDTO> readerReturnDTOList = new ArrayList<ReaderReturnDTO>();
+        ReaderReturnDTO       readerReturnDTO     = new ReaderReturnDTO();
+        
+        readerReturnDTO.setColumn1("column1");
+     
+        readerReturnDTOList.add(readerReturnDTO);
         
         return readerReturnDTOList;
     }

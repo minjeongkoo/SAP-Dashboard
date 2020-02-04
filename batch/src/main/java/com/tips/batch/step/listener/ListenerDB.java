@@ -24,6 +24,7 @@ import com.tips.batch.model.vo.BizVO;
 import com.tips.batch.model.vo.MeasureInfoVO;
 import com.tips.batch.repository.MeasureInfoRealRepository;
 import com.tips.batch.service.MeasureInfoRealService;
+import com.tips.batch.step.reader.ReaderRestApi;
 
 
 public class ListenerDB extends JobExecutionListenerSupport
@@ -48,5 +49,7 @@ public class ListenerDB extends JobExecutionListenerSupport
         		measureInfoRealService.save(measureInfoReal);
         	}
         }
+       
+        ReaderRestApi.initRunningCount();
     }
 }
