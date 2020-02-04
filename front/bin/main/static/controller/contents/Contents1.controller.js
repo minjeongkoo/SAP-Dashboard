@@ -106,7 +106,7 @@ sap.ui.define([
         localApi : function()
         {
             var oParam = {
-                url     : "http://192.168.1.138:9001/list",
+                url     : "http://192.168.1.138:9001/list/page?page=1&size=25&sort=asc",
                 type    : "GET",
                 data    : "",
                 callback: "callbackFunction",
