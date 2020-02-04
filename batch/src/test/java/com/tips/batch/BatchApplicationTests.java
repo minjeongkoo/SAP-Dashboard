@@ -1,10 +1,10 @@
-package com.example.quartz;
+package com.tips.batch;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class QBatch2ApplicationTests {
+class BatchApplicationTests {
 
 	@Test
 	void contextLoads() {

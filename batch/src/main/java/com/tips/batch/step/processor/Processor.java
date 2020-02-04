@@ -11,9 +11,9 @@ import org.springframework.batch.item.ItemProcessor;
 import com.tips.batch.model.ProcessorReceiveDTO;
 import com.tips.batch.model.ReaderReturnDTO;
 
-public class ProcessorImpl implements ItemProcessor<List<ReaderReturnDTO>, List<ProcessorReceiveDTO>>
+public class Processor implements ItemProcessor<List<ReaderReturnDTO>, List<ProcessorReceiveDTO>>
 {
-    private static final Logger log = LoggerFactory.getLogger(ProcessorImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(Processor.class);
 
     List<ProcessorReceiveDTO> processorReceiveDTO = new ArrayList<ProcessorReceiveDTO>();
     

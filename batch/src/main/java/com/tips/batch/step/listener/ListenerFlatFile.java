@@ -21,9 +21,9 @@ import com.tips.batch.model.FileWriteDTO;
 import com.tips.batch.model.entity.MeasureInfoRealStage;
 import com.tips.batch.model.vo.BizVO;
 
-public class ListenerFlatFileExt extends JobExecutionListenerSupport
+public class ListenerFlatFile extends JobExecutionListenerSupport
 {
-    private static final Logger log       = LoggerFactory.getLogger(ListenerFlatFileExt.class);
+    private static final Logger log       = LoggerFactory.getLogger(ListenerFlatFile.class);
     private static final String HEADER    = "stock,open,close,low,high";
     private static final String LINE_DILM = ",";
 

@@ -14,16 +14,11 @@ import org.springframework.core.io.FileSystemResource;
 
 import com.tips.batch.model.ReaderReturnDTO;
 
-/**
- * The Class FxMarketEventReader.
- *
- * @author ashraf
- */
-public class ReaderFlatFileExt extends FlatFileItemReader<ReaderReturnDTO>
+public class ReaderFlatFile extends FlatFileItemReader<ReaderReturnDTO>
 {
-	private static final Logger log = LoggerFactory.getLogger(ReaderFlatFileExt.class);
+	private static final Logger log = LoggerFactory.getLogger(ReaderFlatFile.class);
 	
-    public ReaderFlatFileExt()
+    public ReaderFlatFile()
     {
     	log.info("[ReaderImpl] ReaderImpl()");
     	
@@ -34,15 +29,18 @@ public class ReaderFlatFileExt extends FlatFileItemReader<ReaderReturnDTO>
         this.setLinesToSkip(1);
         
         // Line is mapped to item (FxMarketEvent) using setLineMapper(LineMapper)
-        this.setLineMapper(new DefaultLineMapper<ReaderReturnDTO>() {
+        this.setLineMapper(new DefaultLineMapper<ReaderReturnDTO>()
+        {
             {
-                setLineTokenizer(new DelimitedLineTokenizer() {
+                setLineTokenizer(new DelimitedLineTokenizer()
+                {
                     { 
                         setNames(new String[] { "id", "stock", "time", "price", "shares" });
                     }
                 });
                 
-                setFieldSetMapper(new BeanWrapperFieldSetMapper<ReaderReturnDTO>() {
+                setFieldSetMapper(new BeanWrapperFieldSetMapper<ReaderReturnDTO>()
+                {
                     {
                         setTargetType(ReaderReturnDTO.class);
                     }

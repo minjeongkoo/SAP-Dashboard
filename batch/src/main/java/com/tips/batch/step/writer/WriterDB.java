@@ -30,9 +30,9 @@ import com.tips.batch.model.vo.MeasureInfoVO;
 
 
 @StepScope
-public class WriterDBImpl implements ItemWriter<List<ProcessorReceiveDTO>>
+public class WriterDB implements ItemWriter<List<ProcessorReceiveDTO>>
 {
-    private static final Logger log = LoggerFactory.getLogger(WriterDBImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(WriterDB.class);
     
     @Autowired
     MeasureInfoVO measureInfoVO;
@@ -84,7 +84,7 @@ public class WriterDBImpl implements ItemWriter<List<ProcessorReceiveDTO>>
                                     + "  , :columnD1 , :columnD2 , :columnD3 , :columnD4 , :columnD5                                                 "
                                     + ")                                                                                                             ";
     
-    public WriterDBImpl()
+    public WriterDB()
     {
         dataSource.setDriver  (new org.postgresql.Driver());
         dataSource.setUrl     ("jdbc:postgresql://localhost:5432/tipsdb");

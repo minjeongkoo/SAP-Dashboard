@@ -26,9 +26,9 @@ import com.tips.batch.repository.MeasureInfoRealRepository;
 import com.tips.batch.service.MeasureInfoRealService;
 
 
-public class ListenerDBExt extends JobExecutionListenerSupport
+public class ListenerDB extends JobExecutionListenerSupport
 {
-    private static final Logger log  = LoggerFactory.getLogger(ListenerDBExt.class);
+    private static final Logger log  = LoggerFactory.getLogger(ListenerDB.class);
     
     @Autowired
     MeasureInfoRealService measureInfoRealService;

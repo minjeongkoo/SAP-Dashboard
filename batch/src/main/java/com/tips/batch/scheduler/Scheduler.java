@@ -1,5 +1,8 @@
 package com.tips.batch.scheduler;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
@@ -21,12 +24,17 @@ public class Scheduler
     Job processJob;
     
     @Bean
-    @Scheduled(cron = "*/5 * * * * *")
+    @Scheduled(cron = "*/10 * * * * *")
     public void batchRun() throws Exception
     {
         System.out.println("------------------------------- SpringBatch Start!!! -------------------------------");
 
-        JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis()).toJobParameters();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월dd일 HH시mm분ss초");
+        Calendar         calendar         = Calendar.getInstance();
+        String           startTime        = simpleDateFormat.format(calendar.getTime());
+        
+        JobParameters jobParameters = new JobParametersBuilder().addString("StartTime", startTime)
+                                                                .toJobParameters();
 
         jobLauncher.run(processJob, jobParameters);
     }

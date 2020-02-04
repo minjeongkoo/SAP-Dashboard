@@ -10,13 +10,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
  
-public class ReaderDummyImpl implements ItemReader<ReaderReturnDTO>
+public class ReaderDummy implements ItemReader<ReaderReturnDTO>
 {
-	private static final Logger log = LoggerFactory.getLogger(ReaderDummyImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(ReaderDummy.class);
 	
 	private static int readCount = 0;
 	
-	public ReaderDummyImpl() {};
+	public ReaderDummy() {};
 	
 	public ReaderReturnDTO getResource(int readCount)
 	{

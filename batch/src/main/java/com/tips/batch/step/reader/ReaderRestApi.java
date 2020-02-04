@@ -3,37 +3,55 @@ package com.tips.batch.step.reader;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tips.batch.mapper.ColumnMap;
 import com.tips.batch.model.ReaderReturnDTO;
-import com.tips.batch.model.reader.ReaderSourceDTO;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.springframework.batch.item.ItemReader;
-import org.springframework.web.client.RestTemplate;
-import com.fasterxml.jackson.core.type.TypeReference;
 
-public class ReaderRestApiImpl implements ItemReader<List<ReaderReturnDTO>>
+import org.springframework.batch.core.configuration.annotation.JobScope;
+import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.item.ItemReader;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+public class ReaderRestApi implements ItemReader<List<ReaderReturnDTO>>
 {
-    private static final Logger log = LoggerFactory.getLogger(ReaderRestApiImpl.class);
+    private static final Logger                log                 = LoggerFactory.getLogger(ReaderRestApi.class);
+    private static final String[]              runningKey          = {"서울", "경기", "인천" };
+    private static       int                   runningCount        = 0;
+    public               List<ReaderReturnDTO> readerReturnDTOList = new ArrayList<ReaderReturnDTO>();
     
-    private static final String[] runningKey = {"서울", "경기", "인천" };
-    //private static final String[] runningKey = { "서울" };
+    @Value("#{jobParameters['StartTime']}")
+    public String startTime;
     
-    public ReaderRestApiImpl() {};
-    
-    private static int runningCount = 0;
-    
-  //List<ReaderSourceDTO> readerSourceDTOList = new ArrayList<ReaderSourceDTO>();  // REST API 리턴 형식
-    List<ReaderReturnDTO> readerReturnDTOList = new ArrayList<ReaderReturnDTO>();  // Processor 로 넘길 형식
+    @Override
+    public List<ReaderReturnDTO> read()
+    {
+        log.info("[ReaderRestApi] read() startTime : {}", startTime);
+        
+        //runningCount = (int) runCount;
+        
+        // Must send null to end the batch
+        List<ReaderReturnDTO> readerReturnDTOList = null;
+        
+        if (runningCount < runningKey.length && 1 == 1)
+        {
+            log.info("[ReaderRestApi] read() runningCount : {}, runningKey.length : {}, runningKey : {}", runningCount, runningKey.length, runningKey[runningCount]);
+            
+            readerReturnDTOList = this.getResource(runningKey[runningCount]);
+            
+            runningCount++;
+        }
+        
+        return readerReturnDTOList;
+    }
     
     // Get Rest Api Data
     public List<ReaderReturnDTO> getResource(String keySidoName)
@@ -42,17 +60,7 @@ public class ReaderRestApiImpl implements ItemReader<List<ReaderReturnDTO>>
         
         try
         {
-            // Local -------------------------------------------------------------------------------------------------------------------
-            /** **
-            String uri = "http://localhost:8081/list";
-            
-            RestTemplate restTemplate = new RestTemplate();
-            
-            String response = restTemplate.getForObject(uri, String.class);
-            ** **/
-            
             // 미세먼지 공공 REST API ------------------------------------------------------------------------------------------------------
-            /** **/
             String url           = "http://openapi.airkorea.or.kr/openapi/services/rest/";
             String serviceId     = "ArpltnInforInqireSvc"                                ;  // 대기오염정보 조회 서비스
             String operationName = "getCtprvnRltmMesureDnsty"                            ;  // 시도별 실시간 측정정보 조회
@@ -60,7 +68,6 @@ public class ReaderRestApiImpl implements ItemReader<List<ReaderReturnDTO>>
             String serviceKey    = "2%2Bxy%2FDG9FLV3s9hUtwRXX1%2F4KjR92LJqXblaoGqWPzs2u4s4ZxqgXnYQiEUNIAaoXjy66zBIafygmX8ayFFgRw%3D%3D";
             String numOfRows     = "100"                                  ;
             String pageNo        = "1"                                    ;
-          //String sidoNameTmp   = "서울"                                  ;
             String sidoName      = URLEncoder.encode(keySidoName, "UTF-8");
             String version       = "1.3"                                  ;
             String returnType    = "json"                                 ;
@@ -95,18 +102,12 @@ public class ReaderRestApiImpl implements ItemReader<List<ReaderReturnDTO>>
             {
                 response = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream()));
             };
-            /** **/
-            
-            //log.info("[ReaderRestApiImpl] getResource() response : " + response.toString());
             
             // ------------------------------------------------------------------------------------------------------------------------
             
             ObjectMapper mapper = new ObjectMapper();
             
-          //JsonNode list = mapper.readTree(response).path("result").get("list");  // Local
-            JsonNode list = mapper.readTree(response).get("list");  // Public
-            
-            //log.info("[ReaderRestApiImpl] getResource() list : " + list.toString());
+            JsonNode list = mapper.readTree(response).get("list");
             
             for (int i = 0; i < list.size(); i++)
             {
@@ -145,8 +146,6 @@ public class ReaderRestApiImpl implements ItemReader<List<ReaderReturnDTO>>
                 readerReturnObj.setColumn31(list.get(i).get(ColumnMap.json[30]).textValue());
                 readerReturnObj.setColumn32(version);
                 
-                //log.info("[ReaderRestApiImpl] getResource() readerReturnObj : " + readerReturnObj.toString());
-                
                 readerReturnDTOList.add(readerReturnObj);
             }
 
@@ -166,21 +165,5 @@ public class ReaderRestApiImpl implements ItemReader<List<ReaderReturnDTO>>
         }
     }
     
-    @Override
-    public List<ReaderReturnDTO> read()
-    {
-        log.info("[ReaderRestApiImpl] read() runningCount : {}, runningKey : {}, runningKey.length : {}", runningCount, runningKey, runningKey.length);
-        
-        List<ReaderReturnDTO> readerReturnDTOList = null;
-        
-        if (runningCount < runningKey.length && 1 == 2)
-        {
-            readerReturnDTOList = this.getResource(runningKey[runningCount]);
-            
-            runningCount++;
-        }
 
-        return readerReturnDTOList;
-        //return null;
-    }
 }

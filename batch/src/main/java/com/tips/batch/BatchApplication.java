@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling
 @EnableBatchProcessing
-public class BatchApplication //implements CommandLineRunner
+public class BatchApplication
 {
     @Autowired
     public JobLauncher jobLauncher;
@@ -26,12 +26,4 @@ public class BatchApplication //implements CommandLineRunner
     {
         SpringApplication.run(BatchApplication.class, args);
     }
-    
-//    @Override
-//    public void run(String... args) throws Exception 
-//    {
-//        JobParameters params = new JobParametersBuilder().addString("ETLJob", String.valueOf(System.currentTimeMillis())).toJobParameters();
-//        
-//        jobLauncher.run(job, params);
-//    }
 }

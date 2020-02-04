@@ -2,40 +2,39 @@
 
 import java.util.List;
 
-import org.quartz.spi.JobFactory;
-import org.quartz.spi.TriggerFiredBundle;
+
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 
 import com.tips.batch.model.ProcessorReceiveDTO;
 import com.tips.batch.model.ReaderReturnDTO;
 import com.tips.batch.model.entity.MeasureInfoRealStage;
 import com.tips.batch.model.vo.BizVO;
 import com.tips.batch.model.vo.MeasureInfoVO;
-import com.tips.batch.step.DummyClass;
-import com.tips.batch.step.listener.ListenerDBExt;
-import com.tips.batch.step.listener.ListenerFlatFileExt;
-import com.tips.batch.step.processor.ProcessorImpl;
-import com.tips.batch.step.reader.ReaderDummyImpl;
-import com.tips.batch.step.reader.ReaderFlatFileExt;
-import com.tips.batch.step.reader.ReaderRestApiImpl;
-import com.tips.batch.step.writer.WriterDBImpl;
-import com.tips.batch.step.writer.WriterDTOImpl;
+import com.tips.batch.step.listener.ListenerDB;
+import com.tips.batch.step.listener.ListenerFlatFile;
+import com.tips.batch.step.processor.Processor;
+import com.tips.batch.step.reader.ReaderDummy;
+import com.tips.batch.step.reader.ReaderFlatFile;
+import com.tips.batch.step.reader.ReaderRestApi;
+import com.tips.batch.step.writer.WriterDB;
+import com.tips.batch.step.writer.WriterDTO;
 
 @Configuration
 @EnableBatchProcessing
-@Import({QuartzConfiguration.class})
 public class BatchConfiguration
 {
     @Autowired
@@ -59,54 +58,55 @@ public class BatchConfiguration
     
     // Reader ----------------------------------------------------------------
     @Bean
-    public ReaderRestApiImpl readerRestApiImpl()
+    @StepScope
+    public ReaderRestApi readerRestApiImpl()
     {
-        return new ReaderRestApiImpl();
+        return new ReaderRestApi();
     }
     
     @Bean
-    public ReaderFlatFileExt readerFlatFileExt()
+    public ReaderFlatFile readerFlatFileExt()
     {
-        return new ReaderFlatFileExt();
+        return new ReaderFlatFile();
     }
 
     @Bean
-    public ReaderDummyImpl readerDummyImpl()
+    public ReaderDummy readerDummyImpl()
     {
-        return new ReaderDummyImpl();
+        return new ReaderDummy();
     }
     
     // Processor -------------------------------------------------------------
     @Bean
-    public ProcessorImpl processorImpl()
+    public Processor processorImpl()
     {
-        return new ProcessorImpl();
+        return new Processor();
     }
     
     // Writer--- -------------------------------------------------------------    
     @Bean
-    public WriterDBImpl writerDBImpl()
+    public WriterDB writerDBImpl()
     {
-        return new WriterDBImpl();
+        return new WriterDB();
     }
    
     @Bean
-    public WriterDTOImpl writerDTOImpl()
+    public WriterDTO writerDTOImpl()
     {
-        return new WriterDTOImpl();
+        return new WriterDTO();
     }
 
     // Listener --------------------------------------------------------------
     @Bean
-    public ListenerFlatFileExt listenerFlatFileExt()
+    public ListenerFlatFile listenerFlatFileExt()
     {
-        return new ListenerFlatFileExt();
+        return new ListenerFlatFile();
     }
 
     @Bean
-    public ListenerDBExt listenerDBExt()
+    public ListenerDB listenerDBExt()
     {
-        return new ListenerDBExt();
+        return new ListenerDB();
     }
     
     // RunIncreamenter -------------------------------------------------------
@@ -122,10 +122,10 @@ public class BatchConfiguration
     public Job jobBean()
     {
         return jobBuilderFactory.get("ETLJob")                       // Share Quartz Configuration
-                                .incrementer(runIdIncrementer   ())  // Automatically parameter increase
+                              //.incrementer(runIdIncrementer   ())  // Automatically parameter increase
                               //.listener   (listenerFlatFileExt())  // Must be Bean
                                 .listener   (listenerDBExt      ())
-                                .flow       (stepBean())
+                                .flow       (stepBean           ())
                                 .end()
                                 .build();
     }
