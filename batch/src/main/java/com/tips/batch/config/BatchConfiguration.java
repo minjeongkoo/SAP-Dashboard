@@ -136,7 +136,7 @@ public class BatchConfiguration
         return stepBuilderFactory.get("ETLStep")
                                  .allowStartIfComplete(true)                                      // allows step re-runnig although there is job that success
                                //.<     ReaderReturnDTO,       ProcessorReceiveDTO>  chunk(1000)  // First:Reader return type. Second:Writer receive type
-                                 .<List<ReaderReturnDTO>, List<ProcessorReceiveDTO>> chunk(1000)  // First:Reader return type. Second:Writer receive type
+                                 .<List<ReaderReturnDTO>, List<ProcessorReceiveDTO>> chunk(1000)     // First:Reader return type. Second:Writer receive type
                                //.reader   (readerFlatFileExt())
                                //.reader   (readerDummyImpl  ())
                                  .reader   (readerRestApiImpl())

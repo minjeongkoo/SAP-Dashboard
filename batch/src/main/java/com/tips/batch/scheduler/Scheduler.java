@@ -24,7 +24,7 @@ public class Scheduler
     Job processJob;
     
     @Bean
-    @Scheduled(cron = "*/60 * * * * *")
+    @Scheduled(cron = "*/10 * * * * *")
     public void batchRun() throws Exception
     {
         System.out.println("------------------------------- SpringBatch Start!!! -------------------------------");

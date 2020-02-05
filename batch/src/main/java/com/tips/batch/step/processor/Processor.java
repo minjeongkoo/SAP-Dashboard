@@ -20,10 +20,17 @@ public class Processor implements ItemProcessor<List<ReaderReturnDTO>, List<Proc
     @Override
     public List<ProcessorReceiveDTO> process(final List<ReaderReturnDTO> items) throws Exception
     {
-        for (ReaderReturnDTO record : items)
+        log.info("[ProcessorImpl] process() items.size() : " + items.size());
+        
+        processorReceiveDTO.clear();
+        
+//        for (ReaderReturnDTO record : items)
+//        {
+        items.forEach(record ->
         {
             ProcessorReceiveDTO ProcessorReceiveDTOObj = new ProcessorReceiveDTO();
             
+           
             ProcessorReceiveDTOObj.setColumn1 (record.getColumn1 ());
             ProcessorReceiveDTOObj.setColumn2 (record.getColumn2 ());
             ProcessorReceiveDTOObj.setColumn3 (record.getColumn3 ());
@@ -57,10 +64,9 @@ public class Processor implements ItemProcessor<List<ReaderReturnDTO>, List<Proc
             ProcessorReceiveDTOObj.setColumn31(record.getColumn31());
             ProcessorReceiveDTOObj.setColumn32(record.getColumn32());
             
-            //log.info("[ProcessorImpl] process() ProcessorReceiveDTOObj : " + ProcessorReceiveDTOObj.toString());
-            
             processorReceiveDTO.add(ProcessorReceiveDTOObj);
-        }
+//        }
+        });
         
         return processorReceiveDTO;
     }

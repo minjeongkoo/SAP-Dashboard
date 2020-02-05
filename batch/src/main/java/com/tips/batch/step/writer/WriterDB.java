@@ -110,13 +110,13 @@ public class WriterDB implements ItemWriter<List<ProcessorReceiveDTO>>
     @Override
     public void write(List<? extends List<ProcessorReceiveDTO>> items) throws Exception
     {
-        log.info("[WriterImplJpa] write() items : " + items.toString());
+        log.info("[WriterImplJpa] write() items.size() : " + items.size());
         
         ArrayList <MeasureInfoRealStage> batchTargetList = new ArrayList<MeasureInfoRealStage>();
         
         for (List<ProcessorReceiveDTO> list : items)
         {
-            //log.info("[WriterImplJpa] write() list : " + list.toString());
+            log.info("[WriterImplJpa] write() list.size() : " + list.size());
             
             list.forEach(record ->
             {

@@ -29,16 +29,17 @@ public class ReaderRestApi implements ItemReader<List<ReaderReturnDTO>>
 {
     private static final Logger                log                 = LoggerFactory.getLogger(ReaderRestApi.class);
     private static final String[]              runningKey          = {"서울", "경기", "인천" };
-    private static       int                   runningCount        = 0;
+    private              int                   runningCount        = 0;
     public               List<ReaderReturnDTO> readerReturnDTOList = new ArrayList<ReaderReturnDTO>();
+    private              boolean               checkRestCall       = false;
     
     @Value("#{jobParameters['StartTime']}")
     public String startTime;
     
-    public static void initRunningCount()
-    {
-    	runningCount = 0;
-    }
+//    public static void initRunningCount()
+//    {
+//        runningCount = 0;
+//    }
     
     @Override
     public List<ReaderReturnDTO> read()
@@ -48,21 +49,36 @@ public class ReaderRestApi implements ItemReader<List<ReaderReturnDTO>>
         //runningCount = (int) runCount;
         
         // Must send null to end the batch
-        List<ReaderReturnDTO> readerReturnDTOList = null;
+        //readerReturnDTOList.clear();
+        readerReturnDTOList = null;
 
         log.info("[ReaderRestApi] read() runningCount : {}, runningKey.length : {}}", runningCount, runningKey.length);
 
-        if (runningCount < runningKey.length && 1 == 1)
+        if (checkRestCall == false)
         {
-        	log.info("[ReaderRestApi] read() runningKey : {}", runningKey[runningCount]);
+            //for (int i = 0; i < runningKey.length; i++)
+            //{
+                //log.info("[ReaderRestApi] read() runningKey : {}", runningKey[i]);
 
-          //readerReturnDTOList = this.getResource(runningKey[runningCount]);
-        	readerReturnDTOList = this.getResourceMock();
-
-            runningCount++;
+              //readerReturnDTOList = this.getResource(runningKey[runningCount]);
+            
+                //ReaderReturnDTO readerReturnDTO = new ReaderReturnDTO();
+            
+                readerReturnDTOList = this.getResourceMock();
+                
+                //log.info("[ReaderRestApi] read() readerReturnDTO.getColumn1() : {}", readerReturnDTO.getColumn1());
+                
+                //readerReturnDTOList.add(readerReturnDTO);
+                
+                log.info("[ReaderRestApi] read() readerReturnDTOList.size() : {}", readerReturnDTOList.size());
+            //}
+            
+            checkRestCall = true;
         }
         
-        log.info("[ReaderRestApi] read() readerReturnDTOList.size() : {}", readerReturnDTOList.size());
+        //readerReturnDTOList = null;
+        
+        //ReaderReturnDTO readerReturnDTO = null;
         
         return readerReturnDTOList;
     }
@@ -71,13 +87,18 @@ public class ReaderRestApi implements ItemReader<List<ReaderReturnDTO>>
     public List<ReaderReturnDTO> getResourceMock()
     {
         List<ReaderReturnDTO> readerReturnDTOList = new ArrayList<ReaderReturnDTO>();
-        ReaderReturnDTO       readerReturnDTO     = new ReaderReturnDTO();
         
-        readerReturnDTO.setColumn1("column1");
+        for (int i = 0; i < runningKey.length; i++)
+        {
+            ReaderReturnDTO       readerReturnDTO     = new ReaderReturnDTO();
+        
+            readerReturnDTO.setColumn3(runningKey[i]);
      
-        readerReturnDTOList.add(readerReturnDTO);
+            readerReturnDTOList.add(readerReturnDTO);
+        }
         
         return readerReturnDTOList;
+        //return readerReturnDTO;
     }
     
     // Get Rest Api Data

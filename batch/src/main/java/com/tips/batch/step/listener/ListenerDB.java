@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.BatchStatus;
@@ -36,7 +38,7 @@ public class ListenerDB extends JobExecutionListenerSupport
     
     @Autowired
     MeasureInfoVO measureInfoVO;
-
+    
     @Override
     public void afterJob(JobExecution jobExecution)
     {
@@ -50,6 +52,6 @@ public class ListenerDB extends JobExecutionListenerSupport
         	}
         }
        
-        ReaderRestApi.initRunningCount();
+        //ReaderRestApi.initRunningCount();
     }
 }
