@@ -119,11 +119,11 @@ public class ReaderRestApi implements ItemReader<List<ReaderReturnDTO>>
                 
                 if (urlconnection.getResponseCode() >= 200 && urlconnection.getResponseCode() <= 300)
                 {
-                    response = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
+                    response = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
                 }
                 else
                 {
-                    response = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream()));
+                    response = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
                 };
                 
                 // ------------------------------------------------------------------------------------------------------------------------
