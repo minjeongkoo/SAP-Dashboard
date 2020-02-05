@@ -7,14 +7,15 @@ import java.util.Map;
 import com.tips.batch.model.FileWriteDTO;
 import com.tips.batch.model.entity.MeasureInfoReal;
 
-public class MeasureInfoVO
+public class MeasureInfoRealMapVO
 {
     private Map<String, MeasureInfoReal> measureInfoReal = new HashMap<String, MeasureInfoReal>();
+    
 
-    public boolean containsKey(Object key)
-    {
-        return measureInfoReal.containsKey(key);
-    }
+//    public boolean containsKey(Object key)
+//    {
+//        return measureInfoReal.containsKey(key);
+//    }
 
     public MeasureInfoReal put(String key, MeasureInfoReal value)
     {
@@ -26,8 +27,8 @@ public class MeasureInfoVO
         return measureInfoReal.values();
     }
 
-    public MeasureInfoReal get(Object key)
-    {
-        return measureInfoReal.get(key);
-    }
+//    public MeasureInfoReal get(Object key)
+//    {
+//        return measureInfoReal.get(key);
+//    }
 }

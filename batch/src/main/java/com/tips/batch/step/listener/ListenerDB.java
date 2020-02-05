@@ -22,36 +22,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.tips.batch.model.FileWriteDTO;
 import com.tips.batch.model.entity.MeasureInfoReal;
 import com.tips.batch.model.entity.MeasureInfoRealStage;
-import com.tips.batch.model.vo.BizVO;
-import com.tips.batch.model.vo.MeasureInfoVO;
+import com.tips.batch.model.vo.MeasureInfoRealListVO;
+import com.tips.batch.model.vo.MeasureInfoRealMapVO;
 import com.tips.batch.repository.MeasureInfoRealRepository;
 import com.tips.batch.service.MeasureInfoRealService;
 import com.tips.batch.step.reader.ReaderRestApi;
 
-
 public class ListenerDB extends JobExecutionListenerSupport
 {
-    private static final Logger log  = LoggerFactory.getLogger(ListenerDB.class);
+    private static final Logger log = LoggerFactory.getLogger(ListenerDB.class);
     
     @Autowired
     MeasureInfoRealService measureInfoRealService;
     
     @Autowired
-    MeasureInfoVO measureInfoVO;
+    MeasureInfoRealMapVO measureInfoRealMapVO;
+    
+    @Autowired
+    MeasureInfoRealListVO measureInfoRealListVO;
     
     @Override
     public void afterJob(JobExecution jobExecution)
     {
-    	log.info("[JobListener] afterJob() BatchStatus.COMPLETED : " + BatchStatus.COMPLETED);
+    	log.info("[JobListener] afterJob() jobExecution.getStatus() : {}, measureInfoRealListVO.size() : {}", jobExecution.getStatus(), measureInfoRealListVO.size());
     	
         if (jobExecution.getStatus() == BatchStatus.COMPLETED)
         {
-        	for (MeasureInfoReal measureInfoReal : measureInfoVO.values())
-        	{
+          //for (MeasureInfoReal measureInfoReal : measureInfoVO.values())
+            for (MeasureInfoReal measureInfoReal : measureInfoRealListVO.get())
+            {
+        	    //log.info("[JobListener] afterJob() measureInfoReal write to mart");
+        	    
         		measureInfoRealService.save(measureInfoReal);
         	}
         }
-       
-        //ReaderRestApi.initRunningCount();
     }
 }

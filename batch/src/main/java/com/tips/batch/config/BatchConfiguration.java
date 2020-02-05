@@ -23,7 +23,8 @@ import com.tips.batch.model.ProcessorReceiveDTO;
 import com.tips.batch.model.ReaderReturnDTO;
 import com.tips.batch.model.entity.MeasureInfoRealStage;
 import com.tips.batch.model.vo.BizVO;
-import com.tips.batch.model.vo.MeasureInfoVO;
+import com.tips.batch.model.vo.MeasureInfoRealListVO;
+import com.tips.batch.model.vo.MeasureInfoRealMapVO;
 import com.tips.batch.step.listener.ListenerDB;
 import com.tips.batch.step.listener.ListenerFlatFile;
 import com.tips.batch.step.processor.Processor;
@@ -51,9 +52,15 @@ public class BatchConfiguration
     }
 
     @Bean
-    public MeasureInfoVO measureInfoVO()
+    public MeasureInfoRealMapVO measureInfoVO()
     {
-        return new MeasureInfoVO();
+        return new MeasureInfoRealMapVO();
+    }
+
+    @Bean
+    public MeasureInfoRealListVO measureInfoRealVO()
+    {
+        return new MeasureInfoRealListVO();
     }
     
     // Reader ----------------------------------------------------------------
@@ -136,7 +143,7 @@ public class BatchConfiguration
         return stepBuilderFactory.get("ETLStep")
                                  .allowStartIfComplete(true)                                      // allows step re-runnig although there is job that success
                                //.<     ReaderReturnDTO,       ProcessorReceiveDTO>  chunk(1000)  // First:Reader return type. Second:Writer receive type
-                                 .<List<ReaderReturnDTO>, List<ProcessorReceiveDTO>> chunk(1000)     // First:Reader return type. Second:Writer receive type
+                                 .<List<ReaderReturnDTO>, List<ProcessorReceiveDTO>> chunk(1)     // First:Reader return type. Second:Writer receive type
                                //.reader   (readerFlatFileExt())
                                //.reader   (readerDummyImpl  ())
                                  .reader   (readerRestApiImpl())

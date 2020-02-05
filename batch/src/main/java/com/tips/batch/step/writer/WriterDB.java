@@ -25,8 +25,8 @@ import com.tips.batch.model.FileWriteDTO;
 import com.tips.batch.model.ProcessorReceiveDTO;
 import com.tips.batch.model.entity.MeasureInfoReal;
 import com.tips.batch.model.entity.MeasureInfoRealStage;
-import com.tips.batch.model.vo.BizVO;
-import com.tips.batch.model.vo.MeasureInfoVO;
+import com.tips.batch.model.vo.MeasureInfoRealListVO;
+import com.tips.batch.model.vo.MeasureInfoRealMapVO;
 
 
 @StepScope
@@ -35,12 +35,13 @@ public class WriterDB implements ItemWriter<List<ProcessorReceiveDTO>>
     private static final Logger log = LoggerFactory.getLogger(WriterDB.class);
     
     @Autowired
-    MeasureInfoVO measureInfoVO;
+    MeasureInfoRealMapVO measureInfoRealMapVO;
+
+    @Autowired
+    MeasureInfoRealListVO measureInfoRealListVO;
     
     private JdbcBatchItemWriter<MeasureInfoRealStage> batchTargetWriter;
     
-    //SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
-
     @Autowired
     DataSource dataSource;
     
@@ -87,14 +88,6 @@ public class WriterDB implements ItemWriter<List<ProcessorReceiveDTO>>
                                     + "  , :columnD1 , :columnD2 , :columnD3 , :columnD4 , :columnD5                                                 "
                                     + ")                                                                                                             ";
     
-//    public WriterDB()
-//    {
-//        dataSource.setDriver  (new org.postgresql.Driver());
-//        dataSource.setUrl     ("jdbc:postgresql://localhost:5432/tipsdb");
-//        dataSource.setUsername("tipsuser");
-//        dataSource.setPassword("tipsuser");
-//    }
-
     @BeforeStep
     public void prepareForWriter()
     {
@@ -117,11 +110,11 @@ public class WriterDB implements ItemWriter<List<ProcessorReceiveDTO>>
         for (List<ProcessorReceiveDTO> list : items)
         {
             log.info("[WriterImplJpa] write() list.size() : " + list.size());
+
+            measureInfoRealListVO.clear();
             
             list.forEach(record ->
             {
-                //log.info("[WriterImplJpa] write() record : " + record.toString());
-                
                 MeasureInfoRealStage batchTarget = new MeasureInfoRealStage();
                 
                 batchTarget.setColumnA1(record.getColumn1 ());
@@ -185,7 +178,9 @@ public class WriterDB implements ItemWriter<List<ProcessorReceiveDTO>>
                 measureInfoReal.setColumnC5(record.getColumn23());
                 measureInfoReal.setColumnC6(record.getColumn24());
                 
-                measureInfoVO.put(record.getColumn5(), measureInfoReal);
+                measureInfoRealMapVO.put(record.getColumn5(), measureInfoReal);  // Single Map
+                
+                measureInfoRealListVO.add(measureInfoReal);  // List
             });
             
             this.batchTargetWriter.write(batchTargetList);

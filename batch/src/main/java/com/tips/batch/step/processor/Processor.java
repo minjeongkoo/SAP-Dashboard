@@ -15,7 +15,7 @@ public class Processor implements ItemProcessor<List<ReaderReturnDTO>, List<Proc
 {
     private static final Logger log = LoggerFactory.getLogger(Processor.class);
 
-    List<ProcessorReceiveDTO> processorReceiveDTO = new ArrayList<ProcessorReceiveDTO>();
+    private List<ProcessorReceiveDTO> processorReceiveDTO = new ArrayList<ProcessorReceiveDTO>();
     
     @Override
     public List<ProcessorReceiveDTO> process(final List<ReaderReturnDTO> items) throws Exception
@@ -24,12 +24,9 @@ public class Processor implements ItemProcessor<List<ReaderReturnDTO>, List<Proc
         
         processorReceiveDTO.clear();
         
-//        for (ReaderReturnDTO record : items)
-//        {
         items.forEach(record ->
         {
             ProcessorReceiveDTO ProcessorReceiveDTOObj = new ProcessorReceiveDTO();
-            
            
             ProcessorReceiveDTOObj.setColumn1 (record.getColumn1 ());
             ProcessorReceiveDTOObj.setColumn2 (record.getColumn2 ());
@@ -65,7 +62,6 @@ public class Processor implements ItemProcessor<List<ReaderReturnDTO>, List<Proc
             ProcessorReceiveDTOObj.setColumn32(record.getColumn32());
             
             processorReceiveDTO.add(ProcessorReceiveDTOObj);
-//        }
         });
         
         return processorReceiveDTO;

@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.tips.batch.model.FileWriteDTO;
 import com.tips.batch.model.ProcessorReceiveDTO;
 import com.tips.batch.model.entity.MeasureInfoRealStage;
-import com.tips.batch.model.vo.BizVO;
+import com.tips.batch.model.vo.MeasureInfoRealListVO;
 
 
 public class WriterDTO implements ItemWriter<ProcessorReceiveDTO>
@@ -19,7 +19,7 @@ public class WriterDTO implements ItemWriter<ProcessorReceiveDTO>
 	private static final Logger log = LoggerFactory.getLogger(WriterDTO.class);
 	
     @Autowired
-    private BizVO bizVO;
+    MeasureInfoRealListVO measureInfoRealListVO;
 
     @Override
     public void write(List<? extends ProcessorReceiveDTO> items) throws Exception
