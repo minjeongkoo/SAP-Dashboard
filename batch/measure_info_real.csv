@@ -1,0 +1,4 @@
+id,data_time,sido_name,station_name,mang_name,so2_value,co_value,o3_value,no2_value,pm10_value,pm10_value_24h,pm25_value,pm25_value_24h,khai_value,so2_grade,co_grade,o3_grade,no2_grade,pm10_grade,pm10_grade_1h,pm25_grade,pm25_grade_1h,khai_grade
+2020년 02월06일 17시00분10초,서울,GasanDigitalComplex,Net,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+2020년 02월06일 17시00분10초,경기,GasanDigitalComplex,Net,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+2020년 02월06일 17시00분10초,인천,GasanDigitalComplex,Net,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null

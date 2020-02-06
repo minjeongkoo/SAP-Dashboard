@@ -44,8 +44,8 @@ public class ReaderRestApi implements ItemReader<List<ReaderReturnDTO>>
 
         if (checkRestCall == false)
         {
-            readerReturnDTOList = this.getResource();
-          //readerReturnDTOList = this.getResourceMock();
+          //readerReturnDTOList = this.getResource();
+            readerReturnDTOList = this.getResourceMock();
                 
             log.info("[ReaderRestApi] read() readerReturnDTOList.size() : {}", readerReturnDTOList.size());
 
@@ -64,7 +64,12 @@ public class ReaderRestApi implements ItemReader<List<ReaderReturnDTO>>
         {
             ReaderReturnDTO readerReturnDTO = new ReaderReturnDTO();
         
-            readerReturnDTO.setColumn3(runningKey[i]);
+            readerReturnDTO.setColumn1(startTime            );
+            readerReturnDTO.setColumn2("Long"               );
+            readerReturnDTO.setColumn3(runningKey[i]        );
+            readerReturnDTO.setColumn4("ABC123"             );
+            readerReturnDTO.setColumn5("GasanDigitalComplex");
+            readerReturnDTO.setColumn6("Net"                );
      
             readerReturnDTOListTmp.add(readerReturnDTO);
         }

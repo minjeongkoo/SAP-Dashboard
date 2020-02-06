@@ -27,12 +27,13 @@ import com.tips.batch.model.vo.MeasureInfoRealListVO;
 import com.tips.batch.model.vo.MeasureInfoRealMapVO;
 import com.tips.batch.step.listener.ListenerDB;
 import com.tips.batch.step.listener.ListenerFlatFile;
+import com.tips.batch.step.listener.ListenerHDFS;
 import com.tips.batch.step.processor.Processor;
 import com.tips.batch.step.reader.ReaderDummy;
 import com.tips.batch.step.reader.ReaderFlatFile;
 import com.tips.batch.step.reader.ReaderRestApi;
 import com.tips.batch.step.writer.WriterDB;
-import com.tips.batch.step.writer.WriterDTO;
+import com.tips.batch.step.writer.WriterVO;
 
 @Configuration
 @EnableBatchProcessing
@@ -98,9 +99,9 @@ public class BatchConfiguration
     }
    
     @Bean
-    public WriterDTO writerDTOImpl()
+    public WriterVO writerDTOImpl()
     {
-        return new WriterDTO();
+        return new WriterVO();
     }
 
     // Listener --------------------------------------------------------------
@@ -114,6 +115,12 @@ public class BatchConfiguration
     public ListenerDB listenerDBExt()
     {
         return new ListenerDB();
+    }
+
+    @Bean
+    public ListenerHDFS listenerHDFS()
+    {
+        return new ListenerHDFS();
     }
     
     // RunIncreamenter -------------------------------------------------------
@@ -131,7 +138,8 @@ public class BatchConfiguration
         return jobBuilderFactory.get("ETLJob")                       // Share Quartz Configuration
                                 .incrementer(runIdIncrementer   ())  // Automatically parameter increase
                               //.listener   (listenerFlatFileExt())  // Must be Bean
-                                .listener   (listenerDBExt      ())
+                              //.listener   (listenerDBExt      ())
+                                .listener   (listenerHDFS       ())
                                 .flow       (stepBean           ())
                                 .end()
                                 .build();

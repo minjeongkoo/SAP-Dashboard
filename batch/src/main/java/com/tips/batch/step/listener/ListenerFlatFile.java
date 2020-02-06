@@ -26,10 +26,7 @@ public class ListenerFlatFile extends JobExecutionListenerSupport
     private static final Logger log       = LoggerFactory.getLogger(ListenerFlatFile.class);
     private static final String HEADER    = "stock,open,close,low,high";
     private static final String LINE_DILM = ",";
-
    
-    //JdbcBatchItemWriter<BatchTarget> databaseItemWriter = new JdbcBatchItemWriter<>();
-    
     @Autowired
     private BizVO bizVO;
 
@@ -45,7 +42,8 @@ public class ListenerFlatFile extends JobExecutionListenerSupport
             
             String createTime = simpleDateFormat.format(date);
             
-            Path path = Paths.get("prices_" + createTime + ".csv");
+          //Path path = Paths.get("prices_" + createTime + ".csv");
+            Path path = Paths.get("prices" + ".csv");
             
             try (BufferedWriter fileWriter = Files.newBufferedWriter(path))
             {
@@ -53,7 +51,7 @@ public class ListenerFlatFile extends JobExecutionListenerSupport
                 
                 fileWriter.newLine();
                 
-                log.info("[JobListener] afterJob() fxMarketPricesStore : " + bizVO.values().toString());
+                log.info("[JobListener] afterJob() PricesStore : " + bizVO.values().toString());
                 
                 for (FileWriteDTO pd : bizVO.values())
                 {

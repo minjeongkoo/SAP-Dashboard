@@ -14,9 +14,9 @@ import com.tips.batch.model.entity.MeasureInfoRealStage;
 import com.tips.batch.model.vo.MeasureInfoRealListVO;
 
 
-public class WriterDTO implements ItemWriter<ProcessorReceiveDTO>
+public class WriterVO implements ItemWriter<ProcessorReceiveDTO>
 {
-	private static final Logger log = LoggerFactory.getLogger(WriterDTO.class);
+	private static final Logger log = LoggerFactory.getLogger(WriterVO.class);
 	
     @Autowired
     MeasureInfoRealListVO measureInfoRealListVO;
