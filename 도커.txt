@@ -1,0 +1,76 @@
+docker run [옵션] 이미지이름 [커맨드]
+- 도커 이미지 실행
+
+ex)
+docker run -it --name master -h master -p 8080:8080 leehyounkyoo/my_image /bin/bash
+
+옵션)
+-it          : interactive + tty
+--name       : 실행컨테이너이름
+-h           : hostname
+-p 8080:8080 : 외부포트 8080 을 컨테이너 내부의 8080 포트로 맵핑(필요한 갯수만큼 복수개 설정 가능)
+커맨드 : run 과 동시에 실행할 명령
+
+
+
+
+docker attach 컨테이너이름
+- 도커 컨테이너 접속
+
+
+
+docker start 컨테이너이름
+- 컨테이너 실행
+
+
+
+docker stop 컨테이너이름
+- 컨테이너 정지
+
+
+
+이미지 만들기
+*. docker file 을 이용한 build
+
+
+*. 컨테이너 commit
+docker commit [옵션] 컨테이너이름 [레포지토리이름[:tag]]
+
+옵션)
+-a "생성자"
+-m "메시지"
+-p=true:false : 이미지생성시 컨테이너 중지여부
+
+
+도커 tag(push 하기전 tag를 붙여야함)
+docker tag 레포지토리:태그 유저ID/레포지토리:태그
+
+docker push 유저ID/레포지토리:태그
+
+
+동일 호스트일경우 None, Host, Bridge, MACVLAN 사용, 서로 다른 호스트 Overlay 사용
+
+
+브리지 네트워크 생성
+docker network create --driver=bridge \
+        --subnet=172.1.0.0/16 \
+        --ip-range=172.1.0.0/24 \
+        --gateway=172.1.0.1 \
+        브릿지이름
+
+172.0.0.0/8 <- 8bit 4개 중에 8bit(첫번째)만 고정 -> 172.0.0.1 ~ 172.255.255.254 사용가능
+172.0.0.0/16 <- 8bit 4개 중에 16bit(두번째까지) 고정 -> 172.0.0.1 ~ 172.0.255.254 사용가능
+172.0.0.0/24 <- 8bit 4개 중에 24bit(세번째까지) 고정 -> 172.0.0.1 ~ 172.0.0.254 사용가능
+
+docker run -i -t --name net_ubuntu -p 8080:8080 --ip 172.1.0.5 --net 브릿지이름 ubuntu:latest
+--ip : 컨테이너에 할당할 IP
+--net : 사용할 브릿지이름
+
+run 명령어의 --net-alias 옵션을 함께 쓰면 특정 호스트 이름으로 컨테이너의 여러개 IP가 할당된다.
+docker run -i -t --name ubuntu_alias_container1 --net swift-bridge --net-alias swift ubuntu:latest
+docker run -i -t --name ubuntu_alias_container2 --net swift-bridge --net-alias swift ubuntu:latest
+=> swift 라는 hostname 의 두개 IP가 생성됨
+
+
+브릿지를 이용하여 하둡 컨테이너(3개 노드)를 구성하고 스프링배치 데이터를 write 하라
+next) docker swarm 구성
