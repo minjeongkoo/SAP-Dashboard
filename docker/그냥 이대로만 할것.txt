@@ -1,0 +1,76 @@
+
+* 전제조건: 도커 설치, 도커 계정, 윈도우 커맨드 또는 파워쉘
+
+
+
+1. Docker 시스템 정리.  이미지, 컨테이너, 모두 삭제
+- # docker system prune -a
+
+
+2. 이미지 pull
+- # docker pull leehyounkyoo/ubuntu:hadoop
+
+
+3. 4개의 파워쉘을 띄우고 각각의 터미널에서 하나씩 도커 컨테이너를 생성한다.  IP 부여 때문에 반드시 순서대로 실행한다.  첫번째가 마스터 노드
+- # docker run -it --rm -h master --name master -p 9000:9000 -p 50010:50010 -p 50020:50020 -p 50030:50030 -p 50060:50060 -p 50070:50070 -p 50075:50075 -p 50090:50090 ubuntu:hadoop
+- # docker run -it --rm -h slave1 --name slave1 --link master:master leehyounkyoo/ubuntu:hadoop
+- # docker run -it --rm -h slave2 --name slave2 --link master:master leehyounkyoo/ubuntu:hadoop
+
+
+4. 각각의 터미널에서 ssh 데몬 실행(네번째 터이널에선 필요없으나 해도 되고 안해도 됨)
+- # /usr/sbin/sshd
+
+
+5. 마스터 노드 hosts 파일 수정
+- # /etc/hosts 파일에 아래 내용 추가
+172.1.0.11 slave1
+172.1.0.12 slave2
+
+
+
+6. 마스터 노드(1번 터미널) 에서 ssh 테스트 및 로그인 초기화
+- # ssh root@slave1
+(실행 후 yes 입력..  이후 exit)
+- # ssh root@slave2
+(실행 후 yes 입력..  이후 exit)
+
+
+7. 마스터 노드(1번 터미널) 에서 하둡 slaves 지정
+- # $HADOOP_HOME/etc/hadoop/slaves
+(localhost 지우고 아래 내용 추가)
+slave1
+slave2
+master
+
+
+8. 마스터 노드(1번 터미널) 에서 namenode 포맷
+- # hadoop namenode -foramt
+
+
+9. 마스터 노드(1번 터미널) 에서 하둡 start
+- # start-all.sh
+(중간중간 yes 입력)
+
+
+10. 각각의 터미널에서 jps 를 이용하여 정상적으로 하둡이 기동되었는지 확인
+- # jps
+(네임노드에서는 ResourceManager, NodeManager, SedondaryNameNode, DataNode 가 실행되고 두개의 slave 에서는 DataNode, NodeManager 가실행된다)
+
+
+11. Admin Page 로 확인
+http://www.master:50070
+데이터 노드 탭에서 Node 정보에 master, slave1, slave2 3개가 있는지 확인
+
+
+12. 클라이언트 컨테이너를 하나 띄워서 하둡에 내장되어 있는 Wordcount MapReduce 로 테스트  
+- # docker run -it -h client --name client --link master:master ubuntu:hadoop
+- # cd $HADOOP_HOME
+- # hadoop fs -mkdir -p /test
+- # hadoop fs -put LICENSE.txt /test
+- # hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.7.jar wordcount /test /test_out
+(MapReduce 실행...)
+- # hadoop fs -ls /test_out
+- # hadoop fs -cat /test_out/*
+
+
+13. Admin Page 'Utilities' 탭의 'Browse the file system' 에서 MapReduce 결과 파일 확인
