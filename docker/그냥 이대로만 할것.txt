@@ -1,5 +1,9 @@
 
 * 전제조건: 도커 설치, 도커 계정, 윈도우 커맨드 또는 파워쉘
+* 사용자 PC 호스트 파일
+127.0.0.1    master
+127.0.0.1    slave1
+127.0.0.1    slave2
 
 
 
@@ -11,20 +15,20 @@
 - # docker pull leehyounkyoo/ubuntu:hadoop
 
 
-3. 4개의 파워쉘을 띄우고 각각의 터미널에서 하나씩 도커 컨테이너를 생성한다.  IP 부여 때문에 반드시 순서대로 실행한다.  첫번째가 마스터 노드
-- # docker run -it --rm -h master --name master -p 9000:9000 -p 50010:50010 -p 50020:50020 -p 50030:50030 -p 50060:50060 -p 50070:50070 -p 50075:50075 -p 50090:50090 ubuntu:hadoop
+3. 3개의 터미널을 띄우고 각각의 터미널에서 하나씩 도커 컨테이너를 생성한다.  IP 부여 때문에 반드시 순서대로 실행한다.  첫번째가 마스터 노드
+- # docker run -it --rm -h master --name master -p 9000:9000 -p 50010:50010 -p 50020:50020 -p 50030:50030 -p 50060:50060 -p 50070:50070 -p 50075:50075 -p 50090:50090 leehyounkyoo/ubuntu:hadoop
 - # docker run -it --rm -h slave1 --name slave1 --link master:master leehyounkyoo/ubuntu:hadoop
 - # docker run -it --rm -h slave2 --name slave2 --link master:master leehyounkyoo/ubuntu:hadoop
 
 
-4. 각각의 터미널에서 ssh 데몬 실행(네번째 터이널에선 필요없으나 해도 되고 안해도 됨)
+4. 각각의 터미널에서 ssh 데몬 실행
 - # /usr/sbin/sshd
 
 
-5. 마스터 노드 hosts 파일 수정
+5. 마스터 노드(첫번째 터미널) hosts 파일 수정
 - # /etc/hosts 파일에 아래 내용 추가
-172.1.0.11 slave1
-172.1.0.12 slave2
+172.17.0.3 slave1
+172.17.0.4 slave2
 
 
 
@@ -49,7 +53,7 @@ master
 
 9. 마스터 노드(1번 터미널) 에서 하둡 start
 - # start-all.sh
-(중간중간 yes 입력)
+(처음 실행시킬때는 중간중간 yes 입력)
 
 
 10. 각각의 터미널에서 jps 를 이용하여 정상적으로 하둡이 기동되었는지 확인
@@ -58,16 +62,18 @@ master
 
 
 11. Admin Page 로 확인
-http://www.master:50070
+http://자기IP:50070
 데이터 노드 탭에서 Node 정보에 master, slave1, slave2 3개가 있는지 확인
+만약 정상 실행이 안될 경우 namenode 에서 stop-all.sh 을 이용해서 프로세스들을 죽인 후 다시 실행
+그래도 안되면 pc 방화벽 확인
 
 
 12. 클라이언트 컨테이너를 하나 띄워서 하둡에 내장되어 있는 Wordcount MapReduce 로 테스트  
-- # docker run -it -h client --name client --link master:master ubuntu:hadoop
+- # docker run -it --rm -h client --name client --link master:master leehyounkyoo/ubuntu:hadoop
 - # cd $HADOOP_HOME
 - # hadoop fs -mkdir -p /test
-- # hadoop fs -put LICENSE.txt /test
-- # hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.7.jar wordcount /test /test_out
+- # hadoop fs -put ./LICENSE.txt /test
+- # hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.7.jar wordcount /test /test_out
 (MapReduce 실행...)
 - # hadoop fs -ls /test_out
 - # hadoop fs -cat /test_out/*
